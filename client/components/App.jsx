@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
-//import { getGreeting } from '../apiClient'
-import AddBook from './AddBook'
+import React from 'react'
+
+//import AddBook from '../../client/components/AddBook'
 import Books from './Books'
 
 const App = () => {
-  const [books, setBooks] = useState(' ')
+  // const [books, setBooks] = useState(' ')
 
-  function handleAddBook(newBook) {
-    if (books.includes(newBook)) return
-    const newBooks = [...books, newBook]
-    setBooks(newBooks)
-  }
+  // function handleAddBook(newBook) {
+  //   if (books.includes(newBook)) return
+  //   const newBooks = [...books, newBook]
+  //   setBooks(newBooks)
+  // }
 
   return (
     <main>
       <h1>{'Your books 📝'}</h1>
-
+      <Books />
       <h2>{'Add new books'}</h2>
-      <AddBook onAddBook={handleAddBook} />
+      {/* <AddBook onAddBook={handleAddBook} /> */}
 
       {/* <h2>{'Your list of books'}</h2>
       <Books books={books} /> */}
