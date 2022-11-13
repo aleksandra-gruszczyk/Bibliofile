@@ -22,7 +22,9 @@ function Books() {
       <ul>
         {books.map((book, i) => (
           <li key={i}>
-            <h3>{book.title}</h3>
+            <h3>
+              {book.title} by {book.author} ({book.year})
+            </h3>
           </li>
         ))}
       </ul>
