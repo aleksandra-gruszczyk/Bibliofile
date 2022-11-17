@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { addBook } from '../apiClient'
 
 function AddBook() {
   const [newBookTitle, setNewBookTitle] = useState(' ')
   const [newAuthor, setNewAuthor] = useState({
-    name: '',
-    surname: '',
+    firstName: '',
+    lastName: '',
   })
   //if author exists prevent duplicate - case insensitive, fill automatically?
 
@@ -14,6 +15,7 @@ function AddBook() {
 
   function handleChangeAuthor(event) {
     const { name, value } = event.target
+
     setNewAuthor({
       ...newAuthor,
       [name]: value,
@@ -22,11 +24,10 @@ function AddBook() {
 
   function handleSubmit(event) {
     event.preventDefault()
-    setNewBookTitle()
-    setNewAuthor('')
+    addBook(newBookTitle, newAuthor)
   }
 
-  const { name: firstName, surname: lastName } = newAuthor
+  const { firstName: firstName, lastName: lastName } = newAuthor
 
   return (
     <div>
@@ -41,13 +42,13 @@ function AddBook() {
       <label htmlFor="author">Author:</label>
       <input
         type="text"
-        name="first_name"
+        name="firstName"
         value={firstName}
         onChange={handleChangeAuthor}
       />
       <input
         type="text"
-        name="last_name"
+        name="lastName"
         value={lastName}
         onChange={handleChangeAuthor}
       />

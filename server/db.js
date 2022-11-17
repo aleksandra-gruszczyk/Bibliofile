@@ -15,13 +15,16 @@ function getAllBooks(db = connection) {
     )
 }
 
-function addBook(newBookTitle, db = connection){
-  return db('books')
-  .insert()
+function addBook(title, authorId, db = connection) {
+  return db('books').insert({ title: title, author_id: authorId })
 }
 
-function newAuthor()
+function addAuthor(firstName, lastName, db = connection) {
+  return db('authors').insert({ first_name: firstName, last_name: lastName })
+}
 
 module.exports = {
   getAllBooks,
+  addAuthor,
+  addBook,
 }

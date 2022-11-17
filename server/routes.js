@@ -19,4 +19,16 @@ router.get('/', (req, res) => {
     .catch(console.error)
 })
 
+router.post('/', (req, res) => {
+  return db
+    .addAuthor(req.body.author.firstName, req.body.author.lastName)
+    .then((authorId) => {
+      return db
+        .addBook(req.body.title, authorId)
+        .then((bookId) => (res.body = bookId))
+        .catch(console.error)
+    })
+    .catch(console.error)
+})
+
 module.exports = router
