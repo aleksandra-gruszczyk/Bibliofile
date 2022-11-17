@@ -14,6 +14,14 @@ function getAllBooks(db = connection) {
       'status.name as status'
     )
 }
+
+function addBook(newBookTitle, db = connection){
+  return db('books')
+  .insert()
+}
+
+function newAuthor()
+
 module.exports = {
   getAllBooks,
 }

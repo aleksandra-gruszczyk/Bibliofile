@@ -1,6 +1,6 @@
 import React from 'react'
 
-//import AddBook from '../../client/components/AddBook'
+import AddBook from './AddBook'
 import Books from './Books'
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
       <h1>{'My books 📝'}</h1>
       <Books />
       <h2>{'Add new books'}</h2>
-      {/* <AddBook onAddBook={handleAddBook} /> */}
+      <AddBook />
     </main>
   )
 }
