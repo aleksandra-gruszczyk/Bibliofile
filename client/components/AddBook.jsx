@@ -22,12 +22,12 @@ function AddBook() {
     })
   }
 
-  function handleSubmit(event) {
-    event.preventDefault()
+  function handleSubmit() {
+    //event.preventDefault()
     addBook(newBookTitle, newAuthor)
   }
 
-  const { firstName: firstName, lastName: lastName } = newAuthor
+  const { firstName, lastName } = newAuthor
 
   return (
     <div>
