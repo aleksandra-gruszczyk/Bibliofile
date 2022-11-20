@@ -7,6 +7,7 @@ function getAllBooks(db = connection) {
     .join('status', 'books.status_id', 'status.id')
     .join('authors', 'books.author_id', 'authors.id')
     .select(
+      'books.id as id',
       'title',
       'authors.first_name',
       'authors.last_name',
@@ -23,8 +24,13 @@ function addAuthor(firstName, lastName, db = connection) {
   return db('authors').insert({ first_name: firstName, last_name: lastName })
 }
 
+function removeBook(bookId, db = connection) {
+  return db('books').where('id', bookId).del()
+}
+
 module.exports = {
   getAllBooks,
   addAuthor,
   addBook,
+  removeBook,
 }

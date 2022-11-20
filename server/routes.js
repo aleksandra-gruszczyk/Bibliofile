@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
           author: book.first_name + ' ' + book.last_name,
           year: book.year_pub,
           status: book.status,
+          id: book.id,
         }))
       )
     )
@@ -27,6 +28,17 @@ router.post('/', (req, res) => {
         .addBook(req.body.title, authorId)
         .then((bookId) => (res.body = bookId))
         .catch(console.error)
+    })
+    .catch(console.error)
+})
+
+router.post('/delete', (req, res) => {
+  const bookId = req.body.id
+  return db
+    .removeBook(bookId)
+    .then((count) => {
+      //res.body = (count>0)
+      return count
     })
     .catch(console.error)
 })

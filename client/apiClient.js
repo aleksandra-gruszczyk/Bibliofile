@@ -19,3 +19,14 @@ export function addBook(title, author) {
     })
     .catch((err) => console.log('ERROR: ' + err.message))
 }
+
+export function deleteBook(bookId) {
+  return request
+    .post(booksUrl + '/delete')
+    .send({ id: bookId })
+    .then((res) => {
+      console.log(res.body)
+      return res.body
+    })
+    .catch((err) => console.log('ERROR: ' + err.message))
+}

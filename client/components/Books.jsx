@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AddBook from './AddBook'
-import { getBooksList } from '../apiClient'
+import { getBooksList, deleteBook } from '../apiClient'
 
 function Books() {
   const [books, setBooks] = useState(null)
@@ -20,6 +20,13 @@ function Books() {
     loadBooks()
   }, [])
 
+  function handleDelete(event) {
+    const bookId = event.target.name
+    deleteBook(bookId)
+      .then(() => loadBooks())
+      .catch(console.error)
+  }
+
   if (isLoading || books == null) return 'Loading...'
 
   return (
@@ -29,7 +36,10 @@ function Books() {
           {books.map((book, i) => (
             <li key={i}>
               <h3>
-                &quot;{book.title}&quot; by {book.author} ({book.year})
+                &quot;{book.title}&quot; by {book.author} ({book.year}){' '}
+                <button name={book.id} onClick={handleDelete}>
+                  Remove
+                </button>
               </h3>
             </li>
           ))}
