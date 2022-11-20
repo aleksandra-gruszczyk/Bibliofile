@@ -36,9 +36,8 @@ router.delete('/:id', (req, res) => {
   const bookId = req.params.id
   return db
     .removeBook(bookId)
-    .then((count) => {
-      //res.body = (count>0)
-      return count
+    .then(() => {
+      res.sendStatus(200)
     })
     .catch(console.error)
 })

@@ -41,6 +41,8 @@
     "express": "^4.17.2",
     "knex": "^2.3.0",
     "knex-scripts": "^0.3.6",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0",
     "sqlite3": "^5.1.2"
   },
   "devDependencies": {

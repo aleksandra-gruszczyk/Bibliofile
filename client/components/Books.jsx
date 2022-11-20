@@ -16,13 +16,13 @@ function Books() {
       })
       .catch(console.error)
   }, [])
-  //}, [handleDelete])
 
   function handleDelete(event) {
     const bookId = event.target.name
-
+    console.log(books)
+    console.log([...books].filter((book) => book.id != bookId))
     deleteBook(bookId)
-      .then(() => setReload(true))
+      .then(() => setBooks([...books].filter((book) => book.id != bookId)))
       .catch(console.error)
   }
 
@@ -49,7 +49,7 @@ function Books() {
         </ul>
       </section>
       <h2>{'Add new books'}</h2>
-      <AddBook />
+      <AddBook reload={reload} />
     </>
   )
 }
