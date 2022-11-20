@@ -5,8 +5,9 @@ import { getBooksList, deleteBook } from '../apiClient'
 function Books() {
   const [books, setBooks] = useState(null)
   const [isLoading, setLoading] = useState(true)
+  const [reload, setReload] = useState(false)
 
-  function loadBooks() {
+  useEffect(() => {
     //setLoading(true)
     getBooksList()
       .then((bookList) => setBooks(bookList))
@@ -14,18 +15,20 @@ function Books() {
         setLoading(false)
       })
       .catch(console.error)
-  }
-
-  useEffect(() => {
-    loadBooks()
   }, [])
+  //}, [handleDelete])
 
   function handleDelete(event) {
     const bookId = event.target.name
+
     deleteBook(bookId)
-      .then(() => loadBooks())
+      .then(() => setReload(true))
       .catch(console.error)
   }
+
+  // function handleAdd() {
+  //   setReload(reload + 1)
+  // }
 
   if (isLoading || books == null) return 'Loading...'
 

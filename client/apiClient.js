@@ -22,8 +22,7 @@ export function addBook(title, author) {
 
 export function deleteBook(bookId) {
   return request
-    .post(booksUrl + '/delete')
-    .send({ id: bookId })
+    .delete(booksUrl + '/' + bookId)
     .then((res) => {
       console.log(res.body)
       return res.body

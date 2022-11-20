@@ -32,8 +32,8 @@ router.post('/', (req, res) => {
     .catch(console.error)
 })
 
-router.post('/delete', (req, res) => {
-  const bookId = req.body.id
+router.delete('/:id', (req, res) => {
+  const bookId = req.params.id
   return db
     .removeBook(bookId)
     .then((count) => {

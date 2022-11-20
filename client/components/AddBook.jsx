@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { addBook } from '../apiClient'
 
-function AddBook() {
+function AddBook(props) {
   const [newBookTitle, setNewBookTitle] = useState(' ')
   const [newAuthor, setNewAuthor] = useState({
     firstName: '',
@@ -25,6 +25,8 @@ function AddBook() {
   function handleSubmit() {
     //event.preventDefault()
     addBook(newBookTitle, newAuthor)
+      .then(() => props.onAdd())
+      .catch(console.error)
   }
 
   const { firstName, lastName } = newAuthor
