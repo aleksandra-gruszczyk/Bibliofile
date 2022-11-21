@@ -17,10 +17,10 @@ export function getBooksList() {
 //   id: book.id,
 // }))
 
-export function addBook(title, author) {
+export function addBook(title, author, year) {
   return request
     .post(booksUrl)
-    .send({ title, author })
+    .send({ title, author, year })
     .then((res) => {
       return res.body
     })

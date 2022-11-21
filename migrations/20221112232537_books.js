@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.integer('status_id').references('status.id').defaultTo(1)
     table.integer('year_pub')
     table.datetime('date_added').defaultTo(knex.fn.now())
+    table.unique(['title', 'author_id'])
   })
 }
 

@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { addBook } from '../apiClient'
+import { fetchBooks } from '../actions/bookList'
+import { useDispatch, useSelector } from 'react-redux'
 
 function AddBook() {
   const [newBookTitle, setNewBookTitle] = useState(' ')
@@ -7,7 +9,14 @@ function AddBook() {
     firstName: '',
     lastName: '',
   })
+  const [newPubYear, setNewPubYear] = useState('')
   //if author exists prevent duplicate - case insensitive, fill automatically?
+  const books = useSelector((state) => state.books)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchBooks())
+  }, [books])
 
   function handleChangeBook(event) {
     setNewBookTitle(event.target.value)
@@ -18,13 +27,17 @@ function AddBook() {
 
     setNewAuthor({
       ...newAuthor,
-      [name]: value,
+      [name]: value.trim(),
     })
+  }
+
+  function handleChangePubYear(event) {
+    setNewPubYear(event.target.value)
   }
 
   function handleSubmit() {
     //event.preventDefault()
-    addBook(newBookTitle, newAuthor)
+    addBook(newBookTitle.trim(), newAuthor, newPubYear)
   }
 
   const { firstName, lastName } = newAuthor
@@ -53,7 +66,15 @@ function AddBook() {
         onChange={handleChangeAuthor}
       />
       <br />
-      <button onClick={handleSubmit}>Add your book</button>
+      <label htmlFor="year">Publication year:</label>
+      <input
+        type="text"
+        name="year"
+        value={newPubYear}
+        onChange={handleChangePubYear}
+      />
+      <br />
+      <button onClick={handleSubmit}>Add new book</button>
     </div>
   )
 }

@@ -27,6 +27,12 @@ function Books() {
             <li key={i}>
               <h3>
                 &quot;{book.title}&quot; by {book.author} ({book.year}){' '}
+                <select name="status">
+                  <option value="waiting">To be read</option>
+                  <option value="reading">Reading</option>
+                  <option value="finished">Finished</option>
+                  <option value="DNF">DNF</option>
+                </select>
                 <button name={book.id} onClick={handleDelete}>
                   Remove
                 </button>
