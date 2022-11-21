@@ -9,6 +9,13 @@ export function getBooksList() {
     })
     .catch((err) => console.log(err.message))
 }
+//.map((book) => ({
+//   title: book.title,
+//   author: book.author,
+//   year: book.year,
+//   status: book.status,
+//   id: book.id,
+// }))
 
 export function addBook(title, author) {
   return request
@@ -27,5 +34,5 @@ export function deleteBook(bookId) {
       console.log(res.body)
       return res.body
     })
-    .catch((err) => console.log('ERROR: ' + err.message))
+    .catch((err) => console.log('ERROR: ' + err.message)) //(500)
 }

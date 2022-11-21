@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AddBook from './AddBook'
-import { getBooksList, deleteBook } from '../apiClient'
+import { deleteBook } from '../apiClient'
+import { fetchBooks } from '../actions/bookList'
 
 function Books() {
-  const [books, setBooks] = useState(null)
-  const [isLoading, setLoading] = useState(true)
-  const [reload, setReload] = useState(false)
+  const books = useSelector((state) => state.books)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    //setLoading(true)
-    getBooksList()
-      .then((bookList) => setBooks(bookList))
-      .finally(() => {
-        setLoading(false)
-      })
-      .catch(console.error)
+    dispatch(fetchBooks())
   }, [])
 
   function handleDelete(event) {
     const bookId = event.target.name
-    console.log(books)
-    console.log([...books].filter((book) => book.id != bookId))
     deleteBook(bookId)
-      .then(() => setBooks([...books].filter((book) => book.id != bookId)))
+      .then(() => dispatch(fetchBooks()))
       .catch(console.error)
   }
-
-  // function handleAdd() {
-  //   setReload(reload + 1)
-  // }
-
-  if (isLoading || books == null) return 'Loading...'
 
   return (
     <>
@@ -49,7 +36,7 @@ function Books() {
         </ul>
       </section>
       <h2>{'Add new books'}</h2>
-      <AddBook reload={reload} />
+      <AddBook />
     </>
   )
 }
