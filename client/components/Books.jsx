@@ -26,13 +26,8 @@ function Books() {
           {books.map((book, i) => (
             <li key={i}>
               <h3>
-                &quot;{book.title}&quot; by {book.author} ({book.year}){' '}
-                <select name="status">
-                  <option value="waiting">To be read</option>
-                  <option value="reading">Reading</option>
-                  <option value="finished">Finished</option>
-                  <option value="DNF">DNF</option>
-                </select>
+                &quot;{book.title}&quot; by {book.author} ({book.year}) |{' '}
+                {book.status}{' '}
                 <button name={book.id} onClick={handleDelete}>
                   Remove
                 </button>
