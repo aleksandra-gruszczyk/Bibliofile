@@ -1,18 +1,11 @@
-const request = require('supertest')
-const server = require('../server/server')
-const db = require('../server/db/db')
+import nock from 'nock'
+import { getBooksList } from './apiClient'
 
-jest.mock('../server/db/db')
-jest.spyOn(console, 'error').mockImplementation(() => {})
-
-beforeEach(() => {
-  jest.resetAllMocks()
-})
-
-describe('get /api/v1/books', () => {
-  it('gets the list of books', () => {
-    db.getAllBooks.mockReturnValue(
-      Promise.resolve([
+describe('gets books from the api', () => {
+  it('gets books from the api', () => {
+    const scope = nock('http://localhost')
+      .get('/api/v1/books')
+      .reply(200, [
         {
           title: 'book title',
           author: 'book author',
@@ -21,20 +14,9 @@ describe('get /api/v1/books', () => {
           id: '1',
         },
       ])
-    )
-    return request(server)
-      .get('/api/v1/books')
-      .then((res) => {
-        expect(res.body).toHaveLength(1)
-      })
-  })
-  it('returns 500 and logs error message when error', () => {
-    db.getAllBooks.mockImplementation(() => Promise.reject('No books for you!'))
-    return request(server)
-      .get('api/v1/books')
-      .then((res) => {
-        expect(res.status).toBe(500)
-        expect(console.error).toHaveBeenCalledWith('No books for you!')
-      })
+    return getBooksList().then((booksArr) => {
+      expect(booksArr).toHaveLength(1)
+      expect(scope.isDone()).toBe(true)
+    })
   })
 })

@@ -17,7 +17,10 @@ router.get('/', (req, res) => {
         }))
       )
     )
-    .catch(console.error)
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
 })
 
 router.post('/', (req, res) => {
@@ -29,7 +32,10 @@ router.post('/', (req, res) => {
         .then((bookId) => (res.body = bookId))
         .catch(console.error)
     })
-    .catch(console.error)
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
 })
 
 router.delete('/:id', (req, res) => {
@@ -39,7 +45,10 @@ router.delete('/:id', (req, res) => {
     .then(() => {
       res.sendStatus(200)
     })
-    .catch(console.error)
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
 })
 
 module.exports = router
