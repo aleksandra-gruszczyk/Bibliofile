@@ -31,7 +31,6 @@ export function deleteBook(bookId) {
   return request
     .delete(booksUrl + '/' + bookId)
     .then((res) => {
-      console.log(res.body)
       return res.body
     })
     .catch((err) => console.log('ERROR: ' + err.message)) //(500)

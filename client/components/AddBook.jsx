@@ -2,80 +2,75 @@ import React, { useState, useEffect } from 'react'
 import { addBook } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch, useSelector } from 'react-redux'
+import { useForm } from '@mantine/form'
+import { TextInput, Button, Group } from '@mantine/core'
 
 function AddBook() {
-  const [newBookTitle, setNewBookTitle] = useState(' ')
-  const [newAuthor, setNewAuthor] = useState({
-    firstName: '',
-    lastName: '',
-  })
-  const [newPubYear, setNewPubYear] = useState('')
   //if author exists prevent duplicate - case insensitive, fill automatically?
   const books = useSelector((state) => state.books)
   const dispatch = useDispatch()
+
+  const form = useForm({
+    initialValues: {
+      title: '',
+      firstName: '',
+      lastName: '',
+      year: '',
+    },
+  })
 
   useEffect(() => {
     dispatch(fetchBooks())
   }, [books])
 
-  function handleChangeBook(event) {
-    setNewBookTitle(event.target.value)
+  function handleSubmit(values) {
+    let addedBook = addBook(
+      values.title,
+      {
+        firstName: values.firstName.trim(),
+        lastName: values.lastName.trim(),
+      },
+      values.year
+    )
+    books.push(addedBook)
   }
-
-  function handleChangeAuthor(event) {
-    const { name, value } = event.target
-
-    setNewAuthor({
-      ...newAuthor,
-      [name]: value.trim(),
-    })
-  }
-
-  function handleChangePubYear(event) {
-    setNewPubYear(event.target.value)
-  }
-
-  function handleSubmit() {
-    //event.preventDefault()
-    addBook(newBookTitle.trim(), newAuthor, newPubYear)
-  }
-
-  const { firstName, lastName } = newAuthor
 
   return (
-    <div>
-      <label htmlFor="new-book">Title:</label>
-      <input
-        type="text"
-        name="title"
-        value={newBookTitle}
-        onChange={handleChangeBook}
-      />
-      <br />
-      <label htmlFor="author">Author:</label>
-      <input
-        type="text"
-        name="firstName"
-        value={firstName}
-        onChange={handleChangeAuthor}
-      />
-      <input
-        type="text"
-        name="lastName"
-        value={lastName}
-        onChange={handleChangeAuthor}
-      />
-      <br />
-      <label htmlFor="year">Publication year:</label>
-      <input
-        type="text"
-        name="year"
-        value={newPubYear}
-        onChange={handleChangePubYear}
-      />
-      <br />
-      <button onClick={handleSubmit}>Add new book</button>
-    </div>
+    <>
+      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+        <div style={{ maxWidth: 320, margin: 'auto' }}>
+          <TextInput
+            label="Title"
+            placeholder="Title"
+            {...form.getInputProps('title')}
+          />
+          <TextInput
+            mt="md"
+            label="First Name"
+            placeholder="First Name"
+            {...form.getInputProps('firstName')}
+          />
+          <TextInput
+            mt="md"
+            label="Last Name"
+            placeholder="Last Name"
+            {...form.getInputProps('lastName')}
+          />
+          <TextInput
+            mt="md"
+            label="Publication Year"
+            placeholder="Publication Year"
+            {...form.getInputProps('year')}
+          />
+
+          <Group position="center" mt="xl">
+            <Button type="submit" variant="outline">
+              Add new book
+            </Button>
+          </Group>
+        </div>
+      </form>
+    </>
   )
 }
 export default AddBook

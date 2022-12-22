@@ -1,40 +1,14 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+
 import AddBook from './AddBook'
-import { deleteBook } from '../apiClient'
-import { fetchBooks } from '../actions/bookList'
+
+import { BookCard } from './Card'
 
 function Books() {
-  const books = useSelector((state) => state.books)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchBooks())
-  }, [])
-
-  function handleDelete(event) {
-    const bookId = event.target.name
-    deleteBook(bookId)
-      .then(() => dispatch(fetchBooks()))
-      .catch(console.error)
-  }
-
   return (
     <>
       <section>
-        <ul>
-          {books.map((book, i) => (
-            <li key={i}>
-              <h3>
-                &quot;{book.title}&quot; by {book.author} ({book.year}) |{' '}
-                {book.status}{' '}
-                <button name={book.id} onClick={handleDelete}>
-                  Remove
-                </button>
-              </h3>
-            </li>
-          ))}
-        </ul>
+        <BookCard />
       </section>
       <h2>{'Add new books'}</h2>
       <AddBook />

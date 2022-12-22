@@ -31,7 +31,7 @@ function getOrAddAuthor(firstName, lastName, db = connection) {
     .select('id')
     .first()
     .then((result) => {
-      if (result.id !== 0) {
+      if (typeof result !== 'undefined') {
         return result.id
       }
       return db('authors').insert({
