@@ -4,3 +4,37 @@
   display: inline-block;
   margin: 15px;
 }
+
+.cardStyles {
+  position: absolute;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 350px;
+}
+
+.cardSection {
+  position: relative;
+  }
+
+
+.more {
+  position: absolute;
+  bottom: 15px;
+  right: 8px;
+  margin: 8px;
+  }
+
+.back {
+  position: absolute;
+  top: 35px;
+  right: 8px;
+  margin: 8px;
+}
+
