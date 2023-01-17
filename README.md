@@ -1,16 +1,26 @@
-# Bibliofile
-Your personal book manager and data depository. 
+# Bibliofile - your personal book manager and data depository. 
+
+Every self-respecting bookworm has a dream of their very own library. A library filled with books, and with data about the books. A place where one can store all the information they want about any book they've ever come into contact with.<br> 
+Bibliofile is that kind of space. L-space.
 
 ## Programming
-JS-React-Redux
-SQLite-Knex
-Express.js
-Webpack
-Mantine
+JS-React-Redux<br>
+SQLite-Knex<br>
+Express.js<br>
+Node.js<br>
+Webpack<br>
+Mantine<br>
 
-### Functionality
-Create and edit your own lists of books.
-Trace the status of the books you're reading.
-Collect and access data: title, author data, year of publication, cover image, etc.
-Get your own stats: number of books read, number of books read per year, books to be read, genres, types, etc.
+## Functionality
+Create, edit and remove your own book entries and lists of books.<br>
+Track the status of the books you're reading.<br>
+Collect, access and sort data: title, author data, year of publication, cover image, etc.<br>
+Get your own stats: number of books read, number of books read per year, books to be read, genres, types, authors, etc.<br>
+Write and store your reviews and rating.<br>
 
+## More to come
+Deployment<br>
+Multiple users/Authorization<br>
+Lending/borrowing status and time tracking<br>
+ISBN-based book search<br>
+...
