@@ -1,7 +1,8 @@
 import React from 'react'
 
-import AddBook from './AddBook'
-import { Front, Back } from './CardSides'
+// import AddBook from './AddBook'
+import CardFull from './CardFull'
+// import { Front, Back } from './CardSides'
 
 // import { BookCard } from './Card'
 
@@ -9,11 +10,8 @@ function Books() {
   return (
     <>
       <section>
-        <Front />
-        <Back />
+        <CardFull />
       </section>
-      <h2>{'Add new books'}</h2>
-      <AddBook />
     </>
   )
 }

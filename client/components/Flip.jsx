@@ -5,7 +5,10 @@ export const Flip = forwardRef(Flipped)
 
 function Flipped({ front: Front, back: Back }, ref) {
   const [flipped, setFlipped] = useState(false)
-  const { transform } = useSpring(flipConfig(flipped))
+  const { transform } = useSpring({
+    transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  })
 
   const toggleFlip = () => setFlipped((state) => !state)
   useImperativeHandle(ref, () => ({ toggleFlip }))
@@ -31,9 +34,8 @@ function Flipped({ front: Front, back: Back }, ref) {
   )
 }
 
-function flipConfig(flipped) {
-  return {
-    transform: `perspective(600px) rotateY(${flipped ? 180 : 0}deg)`,
-    config: { mass: 5, tension: 500, friction: 80 },
-  }
-}
+// function flipConfig(flipped) {
+//   return {
+
+//   }
+// }

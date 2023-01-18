@@ -6,15 +6,15 @@
 }
 
 .cardStyles {
+  display: flex;
   position: absolute;
   will-change: transform;
   backface-visibility: hidden;
+  flex-wrap: wrap;
 }
 
 .cardContainer {
-  display: flex;
   align-items: center;
-  justify-content: center;
   width: 250px;
   height: 350px;
 }
