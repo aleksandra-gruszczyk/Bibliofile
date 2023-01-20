@@ -17,12 +17,12 @@
   align-items: center;
   width: 250px;
   height: 350px;
+  display: inline-grid;
 }
 
 .cardSection {
   position: relative;
   }
-
 
 .more {
   position: absolute;

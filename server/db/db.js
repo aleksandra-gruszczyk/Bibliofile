@@ -34,10 +34,14 @@ function getOrAddAuthor(firstName, lastName, db = connection) {
       if (typeof result !== 'undefined') {
         return result.id
       }
-      return db('authors').insert({
-        first_name: firstName,
-        last_name: lastName,
-      })
+      return db('authors')
+        .insert({
+          first_name: firstName,
+          last_name: lastName,
+        })
+        .then((id) => {
+          return id[0]
+        })
     })
 }
 

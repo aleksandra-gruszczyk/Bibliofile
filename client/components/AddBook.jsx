@@ -18,10 +18,10 @@ function AddBook() {
       year: '',
     },
   })
-
-  useEffect(() => {
-    dispatch(fetchBooks())
-  }, [books])
+  // const test = false
+  // useEffect(() => {
+  //   dispatch(fetchBooks())
+  // }, [test])
 
   function handleSubmit(values) {
     let addedBook = addBook(
@@ -33,6 +33,7 @@ function AddBook() {
       values.year
     )
     books.push(addedBook)
+    dispatch(fetchBooks())
   }
 
   return (
