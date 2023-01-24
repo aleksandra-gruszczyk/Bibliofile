@@ -1,12 +1,7 @@
 import { Badge, Button, Card, Image, SimpleGrid, Text } from '@mantine/core'
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { deleteBook } from '../apiClient'
-import { fetchBooks } from '../actions/bookList'
 
 export function Front({ book, flipCard }) {
-  // const books = useSelector((state) => state.books)
-  console.log('jestem')
   return (
     <>
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
@@ -34,13 +29,6 @@ export function Front({ book, flipCard }) {
 }
 
 export function Back({ book, flipCard }) {
-  // const books = useSelector((state) => state.books)
-  // const dispatch = useDispatch()
-  // function removeBook(bookId) {
-  //   deleteBook(bookId)
-  //     .then(() => dispatch(fetchBooks()))
-  //     .catch(console.error)
-  // }
   return (
     <>
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
@@ -92,7 +80,7 @@ export function Back({ book, flipCard }) {
               fullWidth
               mt="md"
               radius="md"
-              onClick={() => removeBook(book.id)}
+              // onClick={() => removeBook(book.id)}
             >
               Remove
             </Button>

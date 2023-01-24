@@ -1,5 +1,5 @@
 .card {
-  width: 250px;
+  width: 240px;
   height: 350px;
   display: inline-block;
   margin: 15px;
@@ -15,9 +15,9 @@
 
 .cardContainer {
   align-items: center;
-  width: 250px;
-  height: 350px;
-  display: inline-grid;
+  width: 280px;
+  height: 380px;
+  display: inline-flex;
 }
 
 .cardSection {
