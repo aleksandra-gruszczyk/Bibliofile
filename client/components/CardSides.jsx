@@ -1,5 +1,13 @@
-import { Badge, Button, Card, Image, SimpleGrid, Text } from '@mantine/core'
-import React from 'react'
+import {
+  Badge,
+  Button,
+  Card,
+  Image,
+  Rating,
+  SimpleGrid,
+  Text,
+} from '@mantine/core'
+import React, { useState } from 'react'
 
 export function Front({ book, flipCard }) {
   return (
@@ -29,12 +37,13 @@ export function Front({ book, flipCard }) {
 }
 
 export function Back({ book, flipCard }) {
+  const [value, setValue] = useState(null)
   return (
     <>
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
         <Card.Section
           className="cardSection"
-          py="lg"
+          py="md"
           mt="lg"
           mb="lg"
           position="apart"
@@ -61,8 +70,18 @@ export function Back({ book, flipCard }) {
             {book.status}
           </Badge>
         </Card.Section>
-
         <Card.Section className="cardSection" inheritPadding mt="sm" pb="md">
+          <Rating
+            position="center"
+            value={value}
+            onChange={setValue}
+            fractions={2}
+            defaultValue={2.5}
+            count={5}
+          />
+        </Card.Section>
+
+        <Card.Section className="cardSection" inheritPadding mt="sm">
           <SimpleGrid cols={2}>
             <Button
               variant="light"
