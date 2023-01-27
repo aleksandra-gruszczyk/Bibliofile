@@ -4,8 +4,7 @@ const db = require('./db/db')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  return db
-    .getAllBooks()
+  db.getAllBooks()
     .then((books) =>
       res.json(
         books.map((book) => ({
@@ -29,7 +28,7 @@ router.post('/', (req, res) => {
     .then((authorId) => {
       return db
         .addBook(req.body.title, authorId, req.body.year)
-        .then((bookId) => (res.body = bookId))
+        .then((bookId) => res.json(bookId))
         .catch(console.error)
     })
     .catch((error) => {

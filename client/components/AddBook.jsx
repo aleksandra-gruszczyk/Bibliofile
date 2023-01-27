@@ -25,7 +25,6 @@ function AddBook() {
   }
 
   useEffect(() => {
-    console.log('jestem')
     dispatch(fetchBooks())
   }, [flag])
 
@@ -39,7 +38,6 @@ function AddBook() {
       values.year
     )
       .then((addedBook) => {
-        console.log(addedBook)
         books.push(addedBook)
         toggleFlag()
       })
