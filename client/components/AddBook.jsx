@@ -8,6 +8,7 @@ import { TextInput, Button, Group } from '@mantine/core'
 function AddBook() {
   //if author exists prevent duplicate - case insensitive, fill automatically?
   const books = useSelector((state) => state.books)
+  const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
 
   const form = useForm({
@@ -18,13 +19,18 @@ function AddBook() {
       year: '',
     },
   })
-  // const test = false
-  // useEffect(() => {
-  //   dispatch(fetchBooks())
-  // }, [test])
+
+  function toggleFlag() {
+    setFlag(!flag)
+  }
+
+  useEffect(() => {
+    console.log('jestem')
+    dispatch(fetchBooks())
+  }, [flag])
 
   function handleSubmit(values) {
-    let addedBook = addBook(
+    addBook(
       values.title,
       {
         firstName: values.firstName.trim(),
@@ -32,8 +38,14 @@ function AddBook() {
       },
       values.year
     )
-    books.push(addedBook)
-    dispatch(fetchBooks())
+      .then((addedBook) => {
+        console.log(addedBook)
+        books.push(addedBook)
+        toggleFlag()
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
