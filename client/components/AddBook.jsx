@@ -17,6 +17,14 @@ function AddBook() {
       lastName: '',
       year: '',
     },
+    validate: {
+      title: (value) =>
+        value.length < 1 ? 'Title must have at least one letter' : null,
+      firstName: (value) =>
+        value.length < 2 ? 'Name must have at least two letters' : null,
+      lastName: (value) =>
+        value.length < 2 ? 'Last name must have at least two letters' : null,
+    },
   })
 
   function toggleFlag() {
