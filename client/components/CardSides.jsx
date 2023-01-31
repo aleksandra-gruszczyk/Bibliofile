@@ -94,7 +94,7 @@ export function Back({ book, flipCard }) {
             >
               Edit
             </Button>
-            <RemoveBook id={book.id} />
+            <RemoveBook book={book} />
           </SimpleGrid>
         </Card.Section>
         <Card.Section className="cardSection">

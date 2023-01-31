@@ -13,8 +13,8 @@ function Books() {
 
   return (
     <>
-      {books.map((book, i) => (
-        <BookCard key={i} book={book} />
+      {books.map((book) => (
+        <BookCard key={book.id} book={book} />
       ))}
     </>
   )
