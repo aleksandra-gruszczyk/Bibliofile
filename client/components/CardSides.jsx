@@ -8,6 +8,7 @@ import {
   Text,
 } from '@mantine/core'
 import React, { useState } from 'react'
+import RemoveBook from './RemoveBook'
 
 export function Front({ book, flipCard }) {
   return (
@@ -93,16 +94,7 @@ export function Back({ book, flipCard }) {
             >
               Edit
             </Button>
-            <Button
-              variant="light"
-              color="blue"
-              fullWidth
-              mt="md"
-              radius="md"
-              // onClick={() => removeBook(book.id)}
-            >
-              Remove
-            </Button>
+            <RemoveBook id={book.id} />
           </SimpleGrid>
         </Card.Section>
         <Card.Section className="cardSection">

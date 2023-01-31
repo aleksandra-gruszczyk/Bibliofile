@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { addBook } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
 import { TextInput, Button, Group } from '@mantine/core'
 
 function AddBook() {
   //if author exists prevent duplicate - case insensitive, fill automatically?
-  const books = useSelector((state) => state.books)
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
 
@@ -37,8 +36,7 @@ function AddBook() {
       },
       values.year
     )
-      .then((addedBook) => {
-        books.push(addedBook)
+      .then(() => {
         toggleFlag()
       })
       .catch((error) => {
