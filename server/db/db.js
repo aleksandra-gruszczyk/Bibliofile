@@ -49,9 +49,14 @@ function removeBook(bookId, db = connection) {
   return db('books').where('id', bookId).del()
 }
 
+function getStatusList(db = connection) {
+  return db('status').select('name')
+}
+
 module.exports = {
   getAllBooks,
   addAuthor: getOrAddAuthor,
   addBook,
   removeBook,
+  getStatusList,
 }

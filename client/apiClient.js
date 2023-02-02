@@ -1,5 +1,6 @@
 import request from 'superagent'
 const booksUrl = '/api/v1/books'
+const statusUrl = 'api/vi/statuses'
 
 export function getBooksList() {
   return request
@@ -31,4 +32,13 @@ export function deleteBook(bookId) {
     .delete(booksUrl + '/' + bookId)
     .then((res) => res.body)
     .catch((err) => console.log('ERROR: ' + err.message)) //(500)
+}
+
+export function getStatusList() {
+  return request
+    .get(statusUrl)
+    .then((res) => {
+      return res.body
+    })
+    .catch((err) => console.log(err.message))
 }

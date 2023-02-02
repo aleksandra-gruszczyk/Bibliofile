@@ -4,6 +4,7 @@ import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
 import { TextInput, Button, Group } from '@mantine/core'
+import BookStatus from './BookStatus'
 
 function AddBook() {
   //if author exists prevent duplicate - case insensitive, fill automatically?
@@ -79,6 +80,8 @@ function AddBook() {
             placeholder="Publication Year"
             {...form.getInputProps('year')}
           />
+
+          <BookStatus mt="md" label="Reading status" />
 
           <Group position="center" mt="xl">
             <Button type="submit" variant="outline">

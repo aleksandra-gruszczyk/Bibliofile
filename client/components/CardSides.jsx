@@ -1,13 +1,7 @@
-import {
-  Badge,
-  Button,
-  Card,
-  Image,
-  Rating,
-  SimpleGrid,
-  Text,
-} from '@mantine/core'
+import { Button, Card, Image, Rating, SimpleGrid, Text } from '@mantine/core'
 import React, { useState } from 'react'
+import BookStatus from './BookStatus'
+
 import RemoveBook from './RemoveBook'
 
 export function Front({ book, flipCard }) {
@@ -63,13 +57,7 @@ export function Back({ book, flipCard }) {
           mb="lg"
           position="apart"
         >
-          <Badge
-            color="blue"
-            variant="gradient"
-            gradient={{ from: '#FF5733', to: '#EFAE02' }}
-          >
-            {book.status}
-          </Badge>
+          <BookStatus book={book} />
         </Card.Section>
         <Card.Section className="cardSection" inheritPadding mt="sm" pb="md">
           <Rating

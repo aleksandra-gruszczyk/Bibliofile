@@ -3,7 +3,7 @@ const db = require('./db/db')
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.get('/books', (req, res) => {
   db.getAllBooks()
     .then((books) =>
       res.json(
@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.post('/', (req, res) => {
+router.post('/books', (req, res) => {
   return db
     .addAuthor(req.body.author.firstName, req.body.author.lastName)
     .then((authorId) => {
@@ -37,13 +37,22 @@ router.post('/', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/books/:id', (req, res) => {
   const bookId = req.params.id
   return db
     .removeBook(bookId)
     .then(() => {
       res.sendStatus(200)
     })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+})
+
+router.get('/statuses', (req, res) => {
+  db.getStatusList()
+    .then((statusList) => res.json(statusList.map((status) => status.name)))
     .catch((error) => {
       console.error(error)
       res.sendStatus(500)

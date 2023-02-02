@@ -2,7 +2,6 @@ import React from 'react'
 import AddBook from './AddBook'
 import Books from './Books'
 import MainHeader from './Header'
-import EditBook from './EditBook'
 
 const App = () => {
   return (
@@ -15,9 +14,6 @@ const App = () => {
       <section>
         <h1 className="h1">{'Add new books'}</h1>
         <AddBook />
-      </section>
-      <section>
-        <EditBook />
       </section>
     </main>
   )
