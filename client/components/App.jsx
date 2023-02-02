@@ -8,12 +8,12 @@ const App = () => {
   return (
     <main>
       <MainHeader />
-      <h1>{'My books 📝'}</h1>
+      <h1 className="h1">{'My books'}</h1>
       <section>
         <Books />
       </section>
       <section>
-        <h2>{'Add new books'}</h2>
+        <h1 className="h1">{'Add new books'}</h1>
         <AddBook />
       </section>
       <section>

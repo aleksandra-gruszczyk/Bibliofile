@@ -37,3 +37,19 @@
   right: 8px;
   margin: 8px;
 }
+
+.header {
+  font-family: 'Homemade Apple'; 
+  font-style: 'cursive';
+  font-size: xx-large;
+  text-align: center;
+  font-weight: 600;
+  padding-top: 0.3em;
+  
+}
+
+.h1 {
+  font-family: 'Special Elite'; 
+  font-style: 'cursive';
+  padding: auto;
+}

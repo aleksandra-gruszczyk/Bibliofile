@@ -4,17 +4,11 @@ import React from 'react'
 export default function MainHeader() {
   return (
     <Header
-      height={60}
-      p="md"
-      style={{
-        backgroundColor: '#EFAE02',
-        color: '#fff',
-        opacity: '75%',
-      }}
+      className="header"
+      height="auto"
+      style={{ backgroundColor: '#EFAE02', color: '#000', opacity: '75%' }}
     >
-      <Text tt="uppercase" fw={700} ta="center" fz="lg">
-        Bibliofile
-      </Text>
+      <Text className="header">Bibliofile</Text>
     </Header>
   )
 }
