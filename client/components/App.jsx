@@ -7,6 +7,10 @@ import { Modal, Button, Group } from '@mantine/core'
 const App = () => {
   const [opened, setOpened] = useState(false)
 
+  function close() {
+    setOpened(false)
+  }
+
   return (
     <main>
       <MainHeader />
@@ -20,7 +24,7 @@ const App = () => {
           onClose={() => setOpened(false)}
           title="Add new book"
         >
-          <AddBook />
+          <AddBook onSuccessfulAdd={close} />
         </Modal>
 
         <Group position="center">

@@ -6,7 +6,7 @@ import { useForm } from '@mantine/form'
 import { TextInput, Button, Group, Select } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 
-function AddBook() {
+function AddBook({ onSuccessfulAdd }) {
   //if author exists prevent duplicate - case insensitive, fill automatically?
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
@@ -53,6 +53,7 @@ function AddBook() {
           message: `Book "${values.title}" has been added`,
           color: 'orange',
         })
+        onSuccessfulAdd()
       })
       .catch((error) => {
         console.error(error)
