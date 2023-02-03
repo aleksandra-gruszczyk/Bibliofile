@@ -3,8 +3,7 @@ import { addBook } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
-import { TextInput, Button, Group } from '@mantine/core'
-import BookStatus from './BookStatus'
+import { TextInput, Button, Group, Select } from '@mantine/core'
 
 function AddBook() {
   //if author exists prevent duplicate - case insensitive, fill automatically?
@@ -17,6 +16,7 @@ function AddBook() {
       firstName: '',
       lastName: '',
       year: '',
+      status: '',
     },
     validate: {
       title: (value) =>
@@ -43,7 +43,8 @@ function AddBook() {
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
       },
-      values.year
+      values.year,
+      values.status
     )
       .then(() => {
         toggleFlag()
@@ -81,7 +82,18 @@ function AddBook() {
             {...form.getInputProps('year')}
           />
 
-          <BookStatus mt="md" label="Reading status" />
+          <Select
+            mt="md"
+            label="Reading status"
+            placeholder="Reading status"
+            {...form.getInputProps('status')}
+            data={[
+              { value: `waiting`, label: 'To Be Read' },
+              { value: `reading`, label: 'Reading' },
+              { value: `finished`, label: 'Finished' },
+              { value: `DNF`, label: 'Did Not Finish' },
+            ]}
+          />
 
           <Group position="center" mt="xl">
             <Button type="submit" variant="outline">

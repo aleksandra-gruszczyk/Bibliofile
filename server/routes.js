@@ -27,7 +27,7 @@ router.post('/books', (req, res) => {
     .addAuthor(req.body.author.firstName, req.body.author.lastName)
     .then((authorId) => {
       return db
-        .addBook(req.body.title, authorId, req.body.year)
+        .addBook(req.body.title, authorId, req.body.year, req.body.status)
         .then((bookId) => res.json(bookId))
         .catch(console.error)
     })

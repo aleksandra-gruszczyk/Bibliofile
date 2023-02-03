@@ -16,12 +16,18 @@ function getAllBooks(db = connection) {
     )
 }
 
-function addBook(title, authorId, year, db = connection) {
-  return db('books').insert({
-    title: title,
-    author_id: authorId,
-    year_pub: year,
-  })
+function addBook(title, authorId, year, status, db = connection) {
+  return db('status')
+    .select('id')
+    .where('name', status)
+    .then((result) => {
+      return db('books').insert({
+        title: title,
+        author_id: authorId,
+        year_pub: year,
+        status_id: result[0].id,
+      })
+    })
 }
 
 function getOrAddAuthor(firstName, lastName, db = connection) {

@@ -18,10 +18,10 @@ export function getBooksList() {
 //   id: book.id,
 // }))
 
-export function addBook(title, author, year) {
+export function addBook(title, author, year, status) {
   return request
     .post(booksUrl)
-    .send({ title, author, year })
+    .send({ title, author, year, status })
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))
