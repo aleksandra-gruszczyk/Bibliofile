@@ -4,6 +4,7 @@ import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
 import { TextInput, Button, Group, Select } from '@mantine/core'
+import { showNotification } from '@mantine/notifications'
 
 function AddBook() {
   //if author exists prevent duplicate - case insensitive, fill automatically?
@@ -48,6 +49,10 @@ function AddBook() {
     )
       .then(() => {
         toggleFlag()
+        showNotification({
+          message: `Book "${values.title}" has been added`,
+          color: 'orange',
+        })
       })
       .catch((error) => {
         console.error(error)
