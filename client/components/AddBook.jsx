@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { addBook } from '../apiClient'
+import { addBook, addCover } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
@@ -47,22 +47,28 @@ function AddBook({ onSuccessfulAdd }) {
 
   function handleSubmit(values) {
     console.log('obrazek:' + file)
-    addBook(
-      values.title,
-      {
-        firstName: values.firstName.trim(),
-        lastName: values.lastName.trim(),
-      },
-      values.year,
-      values.status
-    )
+    addCover()
       .then(() => {
-        toggleFlag()
-        showNotification({
-          message: `Book "${values.title}" has been added`,
-          color: 'orange',
-        })
-        onSuccessfulAdd()
+        addBook(
+          values.title,
+          {
+            firstName: values.firstName.trim(),
+            lastName: values.lastName.trim(),
+          },
+          values.year,
+          values.status
+        )
+          .then(() => {
+            toggleFlag()
+            showNotification({
+              message: `Book "${values.title}" has been added`,
+              color: 'orange',
+            })
+            onSuccessfulAdd()
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       })
       .catch((error) => {
         console.error(error)
@@ -71,7 +77,10 @@ function AddBook({ onSuccessfulAdd }) {
 
   return (
     <>
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+      <form
+        encType="multipart/form-data"
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      >
         <div style={{ maxWidth: 320, margin: 'auto' }}>
           <TextInput
             label="Title"

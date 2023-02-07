@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import AddBook from './AddBook'
 import Books from './Books'
 import MainHeader from './Header'
-import { Modal, Button, Group, Affix } from '@mantine/core'
+import { Modal, Button, Affix } from '@mantine/core'
 import { TfiPlus } from 'react-icons/tfi'
 
 const App = () => {

@@ -1,5 +1,6 @@
 const express = require('express')
 const db = require('./db/db')
+const uploadFile = require('./middleware/upload')
 
 const router = express.Router()
 
@@ -53,6 +54,16 @@ router.delete('/books/:id', (req, res) => {
 router.get('/statuses', (req, res) => {
   db.getStatusList()
     .then((statusList) => res.json(statusList.map((status) => status.name)))
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+})
+
+router.post('/covers', (req, res) => {
+  uploadFile(req.file)
+    .then(() => console.log(req.file))
+
     .catch((error) => {
       console.error(error)
       res.sendStatus(500)

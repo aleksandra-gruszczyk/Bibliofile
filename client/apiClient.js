@@ -1,6 +1,7 @@
 import request from 'superagent'
 const booksUrl = '/api/v1/books'
-const statusUrl = 'api/vi/statuses'
+const statusUrl = 'api/v1/statuses'
+const coversUrl = 'api/v1/covers'
 
 export function getBooksList() {
   return request
@@ -41,4 +42,13 @@ export function getStatusList() {
       return res.body
     })
     .catch((err) => console.log(err.message))
+}
+
+export function addCover(file) {
+  return request
+    .post(coversUrl)
+    .send(file)
+    .then((res) => res.body)
+
+    .catch((err) => console.log('ERROR: ' + err.message))
 }

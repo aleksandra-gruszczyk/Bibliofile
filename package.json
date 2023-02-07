@@ -52,6 +52,7 @@
     "express": "^4.17.2",
     "knex": "^2.3.0",
     "knex-scripts": "^0.3.6",
+    "multer": "^1.4.5-lts.1",
     "react-icons": "^4.7.1",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
