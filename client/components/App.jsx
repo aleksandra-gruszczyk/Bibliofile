@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import AddBook from './AddBook'
 import Books from './Books'
 import MainHeader from './Header'
-import { Modal, Button, Group } from '@mantine/core'
+import { Modal, Button, Group, Affix } from '@mantine/core'
+import { TfiPlus } from 'react-icons/tfi'
 
 const App = () => {
   const [opened, setOpened] = useState(false)
@@ -26,8 +27,7 @@ const App = () => {
         >
           <AddBook onSuccessfulAdd={close} />
         </Modal>
-
-        <Group position="center">
+        <Affix position={{ bottom: 20, right: 20 }}>
           <Button
             variant="gradient"
             gradient={{ from: '#C70039', to: '#EFAE02' }}
@@ -35,9 +35,9 @@ const App = () => {
             radius="md"
             onClick={() => setOpened(true)}
           >
-            Add new book
+            <TfiPlus />
           </Button>
-        </Group>
+        </Affix>
       </section>
     </main>
   )
