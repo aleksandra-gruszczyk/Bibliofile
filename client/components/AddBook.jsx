@@ -3,13 +3,21 @@ import { addBook } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
-import { TextInput, Button, Group, Select } from '@mantine/core'
+import {
+  TextInput,
+  Button,
+  Group,
+  Select,
+  FileButton,
+  Text,
+} from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 
 function AddBook({ onSuccessfulAdd }) {
   //if author exists prevent duplicate - case insensitive, fill automatically?
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
+  const [file, setFile] = useState(null)
 
   const form = useForm({
     initialValues: {
@@ -38,6 +46,7 @@ function AddBook({ onSuccessfulAdd }) {
   }, [flag])
 
   function handleSubmit(values) {
+    console.log('obrazek:' + file)
     addBook(
       values.title,
       {
@@ -100,9 +109,21 @@ function AddBook({ onSuccessfulAdd }) {
               { value: `DNF`, label: 'Did Not Finish' },
             ]}
           />
-
+          <FileButton
+            variant="subtle"
+            color="orange"
+            onChange={setFile}
+            accept="image/png,image/jpeg, image/jpg"
+          >
+            {(props) => <Button {...props}>Upload cover image</Button>}
+          </FileButton>
+          {file && (
+            <Text size="sm" align="center" mt="sm">
+              Picked file: {file.name}
+            </Text>
+          )}
           <Group position="center" mt="xl">
-            <Button type="submit" variant="outline">
+            <Button type="submit" variant="outline" color="orange">
               Add new book
             </Button>
           </Group>
