@@ -61,6 +61,7 @@ router.get('/statuses', (req, res) => {
 })
 
 router.post('/covers', uploadFileMiddleware, (req, res) => {
+  console.log(req.file)
   res.body = req.file
   res.status(200).json({ filename: req.file })
 })

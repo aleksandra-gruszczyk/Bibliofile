@@ -45,9 +45,11 @@ export function getStatusList() {
 }
 
 export function addCover(file) {
+  const data = new FormData()
+  data.append('image', file)
   return request
     .post(coversUrl)
-    .send(file)
+    .send(data)
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))

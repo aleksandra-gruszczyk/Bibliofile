@@ -46,8 +46,7 @@ function AddBook({ onSuccessfulAdd }) {
   }, [flag])
 
   function handleSubmit(values) {
-    console.log('obrazek:' + file)
-    addCover()
+    addCover(file)
       .then(() => {
         addBook(
           values.title,
