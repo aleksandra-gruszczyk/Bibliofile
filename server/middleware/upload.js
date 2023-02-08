@@ -7,8 +7,8 @@ let storage = multer.diskStorage({
     cb(null, __dirname + '/../public/bookCovers')
   },
   filename: (req, file, cb) => {
-    const uniquePreffix = `${Date.now()}`
-    cb(null, uniquePreffix + file.originalname)
+    let imgName = req.params.id + '.png'
+    cb(null, imgName)
   },
 })
 
@@ -17,4 +17,6 @@ let uploadFile = multer({
   limits: { fileSize: maxSize },
 })
 
-module.exports = { uploadFileMiddleware: uploadFile.single('image') }
+module.exports = {
+  uploadFileMiddleware: uploadFile.single('image'),
+}

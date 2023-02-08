@@ -44,11 +44,12 @@ export function getStatusList() {
     .catch((err) => console.log(err.message))
 }
 
-export function addCover(file) {
+export function addCover(file, bookId) {
   const data = new FormData()
   data.append('image', file)
+
   return request
-    .post(coversUrl)
+    .post(coversUrl + '/' + bookId)
     .send(data)
     .then((res) => res.body)
 

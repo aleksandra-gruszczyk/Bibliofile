@@ -46,28 +46,26 @@ function AddBook({ onSuccessfulAdd }) {
   }, [flag])
 
   function handleSubmit(values) {
-    addCover(file)
+    addBook(
+      values.title,
+      {
+        firstName: values.firstName.trim(),
+        lastName: values.lastName.trim(),
+      },
+      values.year,
+      values.status
+    )
+      .then((bookId) => {
+        console.log(bookId)
+        addCover(file, bookId)
+      })
       .then(() => {
-        addBook(
-          values.title,
-          {
-            firstName: values.firstName.trim(),
-            lastName: values.lastName.trim(),
-          },
-          values.year,
-          values.status
-        )
-          .then(() => {
-            toggleFlag()
-            showNotification({
-              message: `Book "${values.title}" has been added`,
-              color: 'orange',
-            })
-            onSuccessfulAdd()
-          })
-          .catch((error) => {
-            console.error(error)
-          })
+        toggleFlag()
+        showNotification({
+          message: `Book "${values.title}" has been added`,
+          color: 'orange',
+        })
+        onSuccessfulAdd()
       })
       .catch((error) => {
         console.error(error)
