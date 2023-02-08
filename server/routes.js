@@ -1,6 +1,6 @@
 const express = require('express')
 const db = require('./db/db')
-const uploadFile = require('./middleware/upload')
+const { uploadFileMiddleware } = require('./middleware/upload')
 
 const router = express.Router()
 
@@ -60,14 +60,9 @@ router.get('/statuses', (req, res) => {
     })
 })
 
-router.post('/covers', (req, res) => {
-  uploadFile(req.file)
-    .then(() => console.log(req.file))
-
-    .catch((error) => {
-      console.error(error)
-      res.sendStatus(500)
-    })
+router.post('/covers', uploadFileMiddleware, (req, res) => {
+  res.body = req.file
+  res.status(200).json({ filename: req.file })
 })
 
 module.exports = router

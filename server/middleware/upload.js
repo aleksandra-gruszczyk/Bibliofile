@@ -4,12 +4,11 @@ const maxSize = 4 * 1024 * 1024
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, __dirname + '/bookCovers')
+    cb(null, __dirname + '/../public/bookCovers')
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now()
-    console.log(file.name)
-    cb(null, file.name + uniqueSuffix)
+    const uniquePreffix = `${Date.now()}`
+    cb(null, uniquePreffix + file.originalname)
   },
 })
 
