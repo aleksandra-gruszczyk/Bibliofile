@@ -56,7 +56,6 @@ function AddBook({ onSuccessfulAdd }) {
       values.status
     )
       .then((bookId) => {
-        console.log(bookId)
         addCover(file, bookId)
       })
       .then(() => {

@@ -12,7 +12,8 @@ function getAllBooks(db = connection) {
       'authors.first_name',
       'authors.last_name',
       'year_pub',
-      'status.name as status'
+      'status.name as status',
+      'cover_img'
     )
 }
 
@@ -59,10 +60,15 @@ function getStatusList(db = connection) {
   return db('status').select('name')
 }
 
+function setCover(bookId, cover, db = connection) {
+  return db('books').where('id', bookId).update('cover_img', cover)
+}
+
 module.exports = {
   getAllBooks,
   addAuthor: getOrAddAuthor,
   addBook,
   removeBook,
   getStatusList,
+  setCover,
 }

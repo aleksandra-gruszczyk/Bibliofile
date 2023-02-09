@@ -14,6 +14,7 @@ router.get('/books', (req, res) => {
           year: book.year_pub,
           status: book.status,
           id: book.id,
+          cover: book.cover_img,
         }))
       )
     )
@@ -28,7 +29,13 @@ router.post('/books', (req, res) => {
     .addAuthor(req.body.author.firstName, req.body.author.lastName)
     .then((authorId) => {
       return db
-        .addBook(req.body.title, authorId, req.body.year, req.body.status)
+        .addBook(
+          req.body.title,
+          authorId,
+          req.body.year,
+          req.body.status,
+          req.body.cover
+        )
         .then((bookId) => res.json(bookId))
         .catch(console.error)
     })
@@ -61,7 +68,14 @@ router.get('/statuses', (req, res) => {
 })
 
 router.post('/covers/:id', uploadFileMiddleware, (req, res) => {
-  res.status(200).json({ filename: req.file })
+  db.setCover(req.params.id, req.params.id + '.png')
+    .then(() => {
+      res.status(200).json({ filename: req.file })
+    })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
 })
 
 module.exports = router

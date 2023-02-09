@@ -17,7 +17,7 @@ export function Front({ book, flipCard }) {
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
         <Card.Section className="cardSection">
           <Image
-            src={'bookCovers/' + book.id + '.png'}
+            src={'bookCovers/' + book.cover}
             height="350px"
             alt="Cover image"
           />
