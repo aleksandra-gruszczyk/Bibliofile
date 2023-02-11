@@ -2,7 +2,7 @@
   width: 240px;
   height: 350px;
   display: inline-block;
-  margin: 15px;
+  
 }
 
 .cardStyles {
@@ -11,7 +11,7 @@
   will-change: transform;
   backface-visibility: hidden;
   flex-wrap: wrap;
-}
+  }
 
 .cardContainer {
   align-items: center;
@@ -20,8 +20,13 @@
   display: inline-flex;
 }
 
-.cardSection {
+.cardSectionFront {
   position: relative;
+  height: 350px;
+  }
+
+  .cardSectionBack {
+    position: relative;
   }
 
 .more {
@@ -49,7 +54,18 @@
 }
 
 .h1 {
-  font-family: 'Special Elite'; 
+  font-family: 'Special Elite', 'cursive'; 
   font-style: 'cursive';
   padding: auto;
+}
+
+.cover {
+  height: 350px;
+}
+
+.coverTitle {
+  color: #000;
+  padding-top: 100px;
+  font-family: 'Yanone Kaffeesatz', 'sans-serif';
+  font-size: 28px;
 }

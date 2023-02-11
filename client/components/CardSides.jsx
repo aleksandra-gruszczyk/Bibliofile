@@ -1,8 +1,9 @@
 import {
+  BackgroundImage,
   Badge,
   Button,
   Card,
-  Image,
+  Center,
   Rating,
   SimpleGrid,
   Text,
@@ -10,28 +11,43 @@ import {
 import React, { useState } from 'react'
 
 import RemoveBook from './RemoveBook'
+// import ShowTitle from './ShowTitle'
+
+export function DefaultCover({ book }) {
+  if (book.cover == 'default.png') {
+    return (
+      <Center>
+        <Text className="coverTitle">{book.title.toUpperCase()}</Text>
+      </Center>
+    )
+  }
+  return <></>
+}
 
 export function Front({ book, flipCard }) {
   return (
     <>
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
-        <Card.Section className="cardSection">
-          <Image
+        <Card.Section className="cardSectionFront">
+          <BackgroundImage
+            className="cover"
             src={'bookCovers/' + book.cover}
-            height="350px"
             alt="Cover image"
-          />
-          <Button
-            variant="gradient"
-            gradient={{ from: '#C70039', to: '#EFAE02' }}
-            mt="md"
-            radius="md"
-            onClick={flipCard}
-            compact="true"
-            className="more"
           >
-            More
-          </Button>
+            <DefaultCover book={book} />
+
+            <Button
+              variant="gradient"
+              gradient={{ from: '#C70039', to: '#EFAE02' }}
+              mt="md"
+              radius="md"
+              onClick={flipCard}
+              compact="true"
+              className="more"
+            >
+              More
+            </Button>
+          </BackgroundImage>
         </Card.Section>
       </Card>
     </>
@@ -45,7 +61,7 @@ export function Back({ book, flipCard }) {
     <>
       <Card shadow="sm" p="lg" radius="md" withBorder className="card">
         <Card.Section
-          className="cardSection"
+          className="cardSectionBack"
           py="md"
           mt="lg"
           mb="lg"
@@ -59,7 +75,7 @@ export function Back({ book, flipCard }) {
           </Text>
         </Card.Section>
         <Card.Section
-          className="cardSection"
+          className="cardSectionBack"
           py="lg"
           mt="lg"
           mb="lg"
@@ -72,7 +88,12 @@ export function Back({ book, flipCard }) {
             {book.status}
           </Badge>
         </Card.Section>
-        <Card.Section className="cardSection" inheritPadding mt="sm" pb="md">
+        <Card.Section
+          className="cardSectionBack"
+          inheritPadding
+          mt="sm"
+          pb="md"
+        >
           <Rating
             position="center"
             value={value}
@@ -83,7 +104,7 @@ export function Back({ book, flipCard }) {
           />
         </Card.Section>
 
-        <Card.Section className="cardSection" inheritPadding mt="sm">
+        <Card.Section className="cardSectionBack" inheritPadding mt="sm">
           <SimpleGrid cols={2}>
             <Button
               variant="light"
@@ -98,7 +119,7 @@ export function Back({ book, flipCard }) {
             <RemoveBook book={book} />
           </SimpleGrid>
         </Card.Section>
-        <Card.Section className="cardSection">
+        <Card.Section className="cardSectionBack">
           <Button
             variant="gradient"
             gradient={{ from: '#C70039', to: '#EFAE02' }}

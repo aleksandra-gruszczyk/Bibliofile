@@ -14,7 +14,6 @@ import {
 import { showNotification } from '@mantine/notifications'
 
 function AddBook({ onSuccessfulAdd }) {
-  //if author exists prevent duplicate - case insensitive, fill automatically?
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
   const [file, setFile] = useState(null)
@@ -56,7 +55,7 @@ function AddBook({ onSuccessfulAdd }) {
       values.status
     )
       .then((bookId) => {
-        addCover(file, bookId)
+        if (file !== null) addCover(file, bookId)
       })
       .then(() => {
         toggleFlag()
