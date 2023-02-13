@@ -26,7 +26,7 @@ router.get('/books', (req, res) => {
 
 router.post('/books', (req, res) => {
   return db
-    .addAuthor(req.body.author.firstName, req.body.author.lastName)
+    .getOrAddAuthor(req.body.author.firstName, req.body.author.lastName)
     .then((authorId) => {
       return db
         .addBook(
@@ -71,6 +71,25 @@ router.post('/covers/:id', uploadFileMiddleware, (req, res) => {
   db.setCover(req.params.id, req.params.id + '.png')
     .then(() => {
       res.status(200).json({ filename: req.file })
+    })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+})
+
+router.post('books/id', (req, res) => {
+  db.getOrAddAuthor(req.body.author.firstName, req.body.author.lastName)
+    .then((authorId) => {
+      return db
+        .updateBook(
+          req.params.id,
+          req.body.title,
+          authorId,
+          req.body.year,
+          req.body.status
+        )
+        .then((bookId) => res.json(bookId))
     })
     .catch((error) => {
       console.error(error)

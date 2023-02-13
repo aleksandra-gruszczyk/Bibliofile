@@ -55,3 +55,12 @@ export function addCover(file, bookId) {
 
     .catch((err) => console.log('ERROR: ' + err.message))
 }
+
+export function editBook(title, author, year, status, bookId) {
+  return request
+    .post(booksUrl + '/' + bookId)
+    .send({ title, author, year, status })
+    .then((res) => res.body)
+
+    .catch((err) => console.log('ERROR: ' + err.message))
+}

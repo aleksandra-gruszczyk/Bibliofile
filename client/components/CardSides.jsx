@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Center,
+  Modal,
   Rating,
   SimpleGrid,
   Text,
@@ -11,7 +12,7 @@ import {
 import React, { useState } from 'react'
 
 import RemoveBook from './RemoveBook'
-// import ShowTitle from './ShowTitle'
+import EditBook from './EditBook'
 
 export function DefaultCover({ book }) {
   if (book.cover == 'default.png') {
@@ -56,6 +57,11 @@ export function Front({ book, flipCard }) {
 
 export function Back({ book, flipCard }) {
   const [value, setValue] = useState(null)
+  const [opened, setOpened] = useState(false)
+
+  function close() {
+    setOpened(false)
+  }
 
   return (
     <>
@@ -106,13 +112,21 @@ export function Back({ book, flipCard }) {
 
         <Card.Section className="cardSectionBack" inheritPadding mt="sm">
           <SimpleGrid cols={2}>
+            <Modal
+              opened={opened}
+              onClose={() => setOpened(false)}
+              title="Edit book"
+            >
+              <EditBook book={book} onSuccessfulEdit={close} />
+            </Modal>
             <Button
-              variant="light"
-              color="blue"
-              fullWidth
+              variant="gradient"
+              gradient={{ from: '#C70039', to: '#EFAE02' }}
+              compact="true"
               mt="md"
               radius="md"
-              name={book.id}
+              onClick={() => setOpened(true)}
+              // name={book.id}
             >
               Edit
             </Button>

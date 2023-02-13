@@ -1,38 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import { addBook, addCover } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
+import { editBook, addCover } from '../apiClient'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
 import {
   TextInput,
   Button,
-  Group,
   Select,
-  FileButton,
   Text,
+  Group,
+  FileButton,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 
-function AddBook({ onSuccessfulAdd }) {
+function EditBook({ book, onSuccessfulEdit }) {
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
   const [file, setFile] = useState(null)
 
   const form = useForm({
     initialValues: {
-      title: '',
+      title: book.title,
       firstName: '',
       lastName: '',
-      year: '',
-      status: '',
-    },
-    validate: {
-      title: (value) =>
-        value.length < 1 ? 'Title must have at least one letter' : null,
-      firstName: (value) =>
-        value.length < 2 ? 'Name must have at least two letters' : null,
-      lastName: (value) =>
-        value.length < 2 ? 'Last name must have at least two letters' : null,
+      year: book.year,
+      status: book.status,
     },
   })
 
@@ -45,7 +37,7 @@ function AddBook({ onSuccessfulAdd }) {
   }, [flag])
 
   function handleSubmit(values) {
-    addBook(
+    editBook(
       values.title,
       {
         firstName: values.firstName.trim(),
@@ -54,20 +46,21 @@ function AddBook({ onSuccessfulAdd }) {
       values.year,
       values.status
     )
-      .then((bookId) => {
-        if (file !== null) addCover(file, bookId)
-      })
       .then(() => {
         toggleFlag()
         showNotification({
-          message: `Book "${values.title}" has been added`,
+          message: `Book record for "${values.title}" has been updated`,
           color: 'orange',
         })
-        onSuccessfulAdd()
+        onSuccessfulEdit()
       })
       .catch((error) => {
         console.error(error)
       })
+  }
+  function handleChange(file) {
+    setFile(file)
+    addCover(file, book.id)
   }
 
   return (
@@ -113,24 +106,7 @@ function AddBook({ onSuccessfulAdd }) {
               { value: `DNF`, label: 'Did Not Finish' },
             ]}
           />
-          <Group position="center" mt="xl">
-            <FileButton
-              variant="gradient"
-              gradient={{ from: '#C70039', to: '#EFAE02' }}
-              compact="true"
-              mt="md"
-              radius="md"
-              onChange={setFile}
-              accept="image/png,image/jpeg, image/jpg"
-            >
-              {(props) => <Button {...props}>Upload cover image</Button>}
-            </FileButton>
-          </Group>
-          {file && (
-            <Text size="sm" align="center" mt="sm">
-              Picked file: {file.name}
-            </Text>
-          )}
+
           <Group position="center" mt="xl">
             <Button
               type="submit"
@@ -140,12 +116,32 @@ function AddBook({ onSuccessfulAdd }) {
               mt="md"
               radius="md"
             >
-              Add new book
+              Submit changes
             </Button>
+          </Group>
+          <Group position="center" mt="xl">
+            <FileButton
+              // type="submit" //??
+              variant="gradient"
+              gradient={{ from: '#C70039', to: '#EFAE02' }}
+              compact="true"
+              mt="md"
+              radius="md"
+              onChange={handleChange}
+              accept="image/png,image/jpeg, image/jpg"
+            >
+              {(props) => <Button {...props}>Upload cover image</Button>}
+            </FileButton>
+            {file && (
+              <Text size="sm" align="center" mt="sm">
+                Picked file: {file.name}
+              </Text>
+            )}
           </Group>
         </div>
       </form>
     </>
   )
 }
-export default AddBook
+
+export default EditBook

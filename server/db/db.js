@@ -63,12 +63,27 @@ function getStatusList(db = connection) {
 function setCover(bookId, cover, db = connection) {
   return db('books').where('id', bookId).update('cover_img', cover)
 }
+function updateBook(bookId, title, authorId, year, status, db = connection) {
+  return db('books')
+    .where('id', bookId)
+    .update(
+      'title',
+      title,
+      'author_id',
+      authorId,
+      'year_pub',
+      year,
+      'status_id',
+      status
+    )
+}
 
 module.exports = {
   getAllBooks,
-  addAuthor: getOrAddAuthor,
+  getOrAddAuthor,
   addBook,
   removeBook,
   getStatusList,
   setCover,
+  updateBook,
 }
