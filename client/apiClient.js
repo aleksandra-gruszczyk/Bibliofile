@@ -2,6 +2,7 @@ import request from 'superagent'
 const booksUrl = '/api/v1/books'
 const statusUrl = 'api/v1/statuses'
 const coversUrl = 'api/v1/covers'
+const ratingsUrl = 'api/v1/ratings'
 
 export function getBooksList() {
   return request
@@ -19,10 +20,10 @@ export function getBooksList() {
 //   id: book.id,
 // }))
 
-export function addBook(title, author, year, status) {
+export function addBook(title, author, year, status, rating) {
   return request
     .post(booksUrl)
-    .send({ title, author, year, status })
+    .send({ title, author, year, status, rating })
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))
@@ -61,6 +62,15 @@ export function editBook(title, author, year, status, bookId) {
   return request
     .post(booksUrl + '/' + bookId)
     .send({ title, author, year, status })
+    .then((res) => res.body)
+
+    .catch((err) => console.log('ERROR: ' + err.message))
+}
+
+export function editRating(bookId, rating) {
+  return request
+    .post(ratingsUrl + '/' + bookId)
+    .send({ rating })
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))

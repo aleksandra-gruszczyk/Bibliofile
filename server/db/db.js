@@ -13,11 +13,12 @@ function getAllBooks(db = connection) {
       'authors.last_name',
       'year_pub',
       'status.name as status',
-      'cover_img'
+      'cover_img',
+      'rating'
     )
 }
 
-function addBook(title, authorId, year, status, db = connection) {
+function addBook(title, authorId, year, status, rating, db = connection) {
   return db('status')
     .select('id')
     .where('name', status)
@@ -27,6 +28,7 @@ function addBook(title, authorId, year, status, db = connection) {
         author_id: authorId,
         year_pub: year,
         status_id: result[0].id,
+        rating: rating,
       })
     })
 }
@@ -63,6 +65,7 @@ function getStatusList(db = connection) {
 function setCover(bookId, cover, db = connection) {
   return db('books').where('id', bookId).update('cover_img', cover)
 }
+
 function updateBook(bookId, title, authorId, year, status, db = connection) {
   return db('status')
     .select('id')
@@ -77,6 +80,10 @@ function updateBook(bookId, title, authorId, year, status, db = connection) {
     })
 }
 
+function setRating(bookId, rating, db = connection) {
+  return db('books').where('id', bookId).update('rating', rating)
+}
+
 module.exports = {
   getAllBooks,
   getOrAddAuthor,
@@ -85,4 +92,5 @@ module.exports = {
   getStatusList,
   setCover,
   updateBook,
+  setRating,
 }

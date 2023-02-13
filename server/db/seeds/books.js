@@ -12,6 +12,7 @@ exports.seed = async function (knex) {
       status_id: 3,
       year_pub: 2002,
       cover_img: '1.png',
+      rating: 5,
     },
     {
       title: 'Small Gods',
@@ -19,6 +20,7 @@ exports.seed = async function (knex) {
       status_id: 3,
       year_pub: 1992,
       cover_img: '2.png',
+      rating: 5,
     },
     {
       title: "Assassin's Apprentice",
@@ -26,6 +28,7 @@ exports.seed = async function (knex) {
       status_id: 3,
       year_pub: 1995,
       cover_img: '3.png',
+      rating: 4.5,
     },
     {
       title: 'The Technician',
@@ -33,6 +36,7 @@ exports.seed = async function (knex) {
       status_id: 3,
       year_pub: 2010,
       cover_img: '4.png',
+      rating: 5,
     },
     {
       title: 'The Black Company',
@@ -40,6 +44,7 @@ exports.seed = async function (knex) {
       status_id: 3,
       year_pub: 1984,
       cover_img: '5.png',
+      rating: 5,
     },
   ])
 }

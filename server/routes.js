@@ -17,6 +17,7 @@ router.get('/books', (req, res) => {
           status: book.status,
           id: book.id,
           cover: book.cover_img,
+          rating: book.rating,
         }))
       )
     )
@@ -36,7 +37,7 @@ router.post('/books', (req, res) => {
           authorId,
           req.body.year,
           req.body.status,
-          req.body.cover
+          req.body.rating
         )
         .then((bookId) => res.json(bookId))
         .catch(console.error)
@@ -95,6 +96,17 @@ router.post('/books/:id', (req, res) => {
           req.body.status
         )
         .then((bookId) => res.json(bookId))
+    })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+})
+
+router.post('/ratings/:id', (req, res) => {
+  db.setRating(req.params.id, req.body.rating)
+    .then((bookId) => {
+      res.status(200).json(bookId)
     })
     .catch((error) => {
       console.error(error)

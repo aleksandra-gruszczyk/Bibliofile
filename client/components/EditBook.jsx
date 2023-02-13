@@ -12,6 +12,7 @@ import {
   FileButton,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import BookRating from './Rating'
 
 function EditBook({ book, onSuccessfulEdit }) {
   const [flag, setFlag] = useState(false)
@@ -62,7 +63,6 @@ function EditBook({ book, onSuccessfulEdit }) {
     addCover(file, book.id)
       .then(() => {
         toggleFlag()
-        console.log(book.cover)
       })
       .catch((error) => {
         console.error(error)
@@ -84,7 +84,6 @@ function EditBook({ book, onSuccessfulEdit }) {
               variant="subtle"
               color="orange"
               compact="true"
-              //mt="md"
               radius="md"
               onChange={handleChange}
               accept="image/png,image/jpeg, image/jpg"
@@ -134,7 +133,7 @@ function EditBook({ book, onSuccessfulEdit }) {
                 { value: `DNF`, label: 'Did Not Finish' },
               ]}
             />
-
+            <BookRating book={book} />
             <Group position="center" mt="xl">
               <Button
                 type="submit"

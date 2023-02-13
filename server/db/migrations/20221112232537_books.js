@@ -12,6 +12,7 @@ exports.up = function (knex) {
     table.datetime('date_added').defaultTo(knex.fn.now())
     table.unique(['title', 'author_id'])
     table.string('cover_img').defaultTo('default.png')
+    table.decimal('rating')
   })
 }
 

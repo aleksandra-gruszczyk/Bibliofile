@@ -29,19 +29,13 @@
     position: relative;
   }
 
-.more {
+.flip {
   position: absolute;
   bottom: 15px;
   right: 8px;
   margin: 8px;
+  opacity: 75%;
   }
-
-.back {
-  position: absolute;
-  top: 4px;
-  right: 8px;
-  margin: 8px;
-}
 
 .header {
   font-family: 'Homemade Apple'; 

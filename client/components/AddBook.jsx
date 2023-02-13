@@ -6,9 +6,11 @@ import { useForm } from '@mantine/form'
 import {
   TextInput,
   Button,
+  Center,
   Group,
   Select,
   FileButton,
+  Rating,
   Text,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
@@ -17,6 +19,7 @@ function AddBook({ onSuccessfulAdd }) {
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
   const [file, setFile] = useState(null)
+  const [rating, setRating] = useState(null)
 
   const form = useForm({
     initialValues: {
@@ -52,7 +55,8 @@ function AddBook({ onSuccessfulAdd }) {
         lastName: values.lastName.trim(),
       },
       values.year,
-      values.status
+      values.status,
+      rating
     )
       .then((bookId) => {
         if (file !== null) addCover(file, bookId)
@@ -113,6 +117,17 @@ function AddBook({ onSuccessfulAdd }) {
               { value: `DNF`, label: 'Did Not Finish' },
             ]}
           />
+          <Center>
+            <Rating
+              mt="md"
+              position="center"
+              value={rating}
+              onChange={setRating}
+              fractions={2}
+              defaultValue={2.5}
+              count={5}
+            />
+          </Center>
           <Group position="center" mt="xl">
             <FileButton
               variant="gradient"
@@ -127,7 +142,7 @@ function AddBook({ onSuccessfulAdd }) {
             </FileButton>
           </Group>
           {file && (
-            <Text size="sm" align="center" mt="sm">
+            <Text size="xs" align="center" mt="sm">
               Picked file: {file.name}
             </Text>
           )}

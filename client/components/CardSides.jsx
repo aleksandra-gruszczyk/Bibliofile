@@ -5,7 +5,6 @@ import {
   Card,
   Center,
   Modal,
-  Rating,
   SimpleGrid,
   Text,
 } from '@mantine/core'
@@ -13,6 +12,8 @@ import React, { useState } from 'react'
 
 import RemoveBook from './RemoveBook'
 import EditBook from './EditBook'
+import BookRating from './Rating'
+import FlipButton from './FlipButton'
 
 export function DefaultCover({ book }) {
   if (book.cover == 'default.png') {
@@ -36,27 +37,15 @@ export function Front({ book, flipCard }) {
             alt="Cover image"
           >
             <DefaultCover book={book} />
-
-            <Button
-              variant="gradient"
-              gradient={{ from: '#C70039', to: '#EFAE02' }}
-              mt="md"
-              radius="md"
-              onClick={flipCard}
-              compact="true"
-              className="more"
-            >
-              More
-            </Button>
           </BackgroundImage>
         </Card.Section>
+        <FlipButton onFlip={flipCard} />
       </Card>
     </>
   )
 }
 
 export function Back({ book, flipCard }) {
-  const [value, setValue] = useState(null)
   const [opened, setOpened] = useState(false)
 
   function close() {
@@ -80,13 +69,7 @@ export function Back({ book, flipCard }) {
             by {book.authorDisplay} ({book.year})
           </Text>
         </Card.Section>
-        <Card.Section
-          className="cardSectionBack"
-          py="lg"
-          mt="lg"
-          mb="lg"
-          position="apart"
-        >
+        <Card.Section className="cardSectionBack" py="lg" mt="lg" mb="lg">
           <Badge
             variant="gradient"
             gradient={{ from: '#C70039', to: '#EFAE02' }}
@@ -100,14 +83,7 @@ export function Back({ book, flipCard }) {
           mt="sm"
           pb="md"
         >
-          <Rating
-            position="center"
-            value={value}
-            onChange={setValue}
-            fractions={2}
-            defaultValue={2.5}
-            count={5}
-          />
+          <BookRating book={book} />
         </Card.Section>
 
         <Card.Section className="cardSectionBack" inheritPadding mt="sm">
@@ -116,7 +92,7 @@ export function Back({ book, flipCard }) {
               opened={opened}
               onClose={() => setOpened(false)}
               title="Edit book"
-              size="80%"
+              size="700px"
             >
               <EditBook book={book} onSuccessfulEdit={close} />
             </Modal>
@@ -133,19 +109,8 @@ export function Back({ book, flipCard }) {
             <RemoveBook book={book} />
           </SimpleGrid>
         </Card.Section>
-        <Card.Section className="cardSectionBack">
-          <Button
-            variant="gradient"
-            gradient={{ from: '#C70039', to: '#EFAE02' }}
-            compact="true"
-            mt="md"
-            radius="md"
-            onClick={flipCard}
-            className="back"
-          >
-            Back
-          </Button>
-        </Card.Section>
+
+        <FlipButton onFlip={flipCard} />
       </Card>
     </>
   )
