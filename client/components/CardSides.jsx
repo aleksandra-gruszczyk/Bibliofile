@@ -77,7 +77,7 @@ export function Back({ book, flipCard }) {
             &quot;{book.title}&quot;
           </Text>
           <Text weight={350} ta="center">
-            by {book.author} ({book.year})
+            by {book.authorDisplay} ({book.year})
           </Text>
         </Card.Section>
         <Card.Section

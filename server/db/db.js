@@ -64,18 +64,17 @@ function setCover(bookId, cover, db = connection) {
   return db('books').where('id', bookId).update('cover_img', cover)
 }
 function updateBook(bookId, title, authorId, year, status, db = connection) {
-  return db('books')
-    .where('id', bookId)
-    .update(
-      'title',
-      title,
-      'author_id',
-      authorId,
-      'year_pub',
-      year,
-      'status_id',
-      status
-    )
+  return db('status')
+    .select('id')
+    .where('name', status)
+    .then((result) => {
+      return db('books').where('id', bookId).update({
+        title: title,
+        author_id: authorId,
+        year_pub: year,
+        status_id: result[0].id,
+      })
+    })
 }
 
 module.exports = {

@@ -21,8 +21,8 @@ function EditBook({ book, onSuccessfulEdit }) {
   const form = useForm({
     initialValues: {
       title: book.title,
-      firstName: '',
-      lastName: '',
+      firstName: book.authorFirstName,
+      lastName: book.authorLastName,
       year: book.year,
       status: book.status,
     },
@@ -44,7 +44,8 @@ function EditBook({ book, onSuccessfulEdit }) {
         lastName: values.lastName.trim(),
       },
       values.year,
-      values.status
+      values.status,
+      book.id
     )
       .then(() => {
         toggleFlag()
@@ -122,8 +123,8 @@ function EditBook({ book, onSuccessfulEdit }) {
           <Group position="center" mt="xl">
             <FileButton
               // type="submit" //??
-              variant="gradient"
-              gradient={{ from: '#C70039', to: '#EFAE02' }}
+              variant="subtle"
+              color="orange"
               compact="true"
               mt="md"
               radius="md"

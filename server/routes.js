@@ -10,7 +10,9 @@ router.get('/books', (req, res) => {
       res.json(
         books.map((book) => ({
           title: book.title,
-          author: book.first_name + ' ' + book.last_name,
+          authorDisplay: book.first_name + ' ' + book.last_name,
+          authorFirstName: book.first_name,
+          authorLastName: book.last_name,
           year: book.year_pub,
           status: book.status,
           id: book.id,
@@ -78,7 +80,7 @@ router.post('/covers/:id', uploadFileMiddleware, (req, res) => {
     })
 })
 
-router.post('books/id', (req, res) => {
+router.post('/books/:id', (req, res) => {
   db.getOrAddAuthor(req.body.author.firstName, req.body.author.lastName)
     .then((authorId) => {
       return db
