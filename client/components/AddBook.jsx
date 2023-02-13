@@ -12,21 +12,25 @@ import {
   FileButton,
   Rating,
   Text,
+  MultiSelect,
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
+import { DatePicker } from '@mantine/dates'
 
 function AddBook({ onSuccessfulAdd }) {
   const dispatch = useDispatch()
   const [file, setFile] = useState(null)
   const [rating, setRating] = useState(null)
+  const [dateRead, setDateRead] = useState(Date.now())
 
   const form = useForm({
     initialValues: {
       title: '',
       firstName: '',
       lastName: '',
-      year: '',
+      date: '',
       status: '',
+      categories: '',
     },
     validate: {
       title: (value) =>
@@ -45,8 +49,9 @@ function AddBook({ onSuccessfulAdd }) {
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
       },
-      values.year,
+      values.date,
       values.status,
+      values.categories,
       rating
     )
       .then((bookId) => {
@@ -89,11 +94,13 @@ function AddBook({ onSuccessfulAdd }) {
             placeholder="Last Name"
             {...form.getInputProps('lastName')}
           />
-          <TextInput
+          <DatePicker
+            value={dateRead}
+            onChange={setDateRead}
             mt="md"
-            label="Publication Year"
-            placeholder="Publication Year"
-            {...form.getInputProps('year')}
+            label="Date Read"
+            placeholder="Date Read"
+            {...form.getInputProps('date')}
           />
 
           <Select
@@ -106,6 +113,32 @@ function AddBook({ onSuccessfulAdd }) {
               { value: `reading`, label: 'Reading' },
               { value: `finished`, label: 'Finished' },
               { value: `DNF`, label: 'Did Not Finish' },
+            ]}
+          />
+          <MultiSelect
+            t="md"
+            label="Categories"
+            placeholder="Categories"
+            {...form.getInputProps('categories')}
+            data={[
+              { value: `fiction`, label: 'fiction' },
+              { value: `non-fiction`, label: 'non-fiction' },
+              { value: `graphic novel`, label: 'graphic novel' },
+              { value: `manga`, label: 'manga' },
+              { value: `mythology`, label: 'mythology' },
+              { value: `fantasy`, label: 'fantasy' },
+              { value: `science fiction`, label: 'science fiction' },
+              { value: `horror`, label: 'horror' },
+              { value: `mystery`, label: 'mystery' },
+              { value: `thriller`, label: 'thriller' },
+              { value: `romance`, label: 'romance' },
+              { value: `comedy`, label: 'comedy' },
+              { value: `drama`, label: 'drama' },
+              { value: `children's fiction`, label: `children's fiction` },
+              { value: `classic`, label: 'classic' },
+              { value: `poetry`, label: 'poetry' },
+              { value: `action/adventure`, label: 'action/adventure' },
+              { value: `science`, label: 'science' },
             ]}
           />
           <Center>

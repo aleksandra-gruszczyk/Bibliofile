@@ -1,6 +1,7 @@
 const knex = require('knex')
 const config = require('./knexfile').development
 const connection = knex(config)
+const { mapAllCategories } = require('./dataTransform')
 
 function getAllBooks(db = connection) {
   return db('books')
@@ -11,14 +12,22 @@ function getAllBooks(db = connection) {
       'title',
       'authors.first_name',
       'authors.last_name',
-      'year_pub',
+      'date_read',
       'status.name as status',
       'cover_img',
       'rating'
     )
 }
 
-function addBook(title, authorId, year, status, rating, db = connection) {
+function addBook(
+  title,
+  authorId,
+  date,
+  status,
+  categories,
+  rating,
+  db = connection
+) {
   return db('status')
     .select('id')
     .where('name', status)
@@ -26,8 +35,9 @@ function addBook(title, authorId, year, status, rating, db = connection) {
       return db('books').insert({
         title: title,
         author_id: authorId,
-        year_pub: year,
+        date_read: date,
         status_id: result[0].id,
+        categories: categories,
         rating: rating,
       })
     })
@@ -84,6 +94,13 @@ function setRating(bookId, rating, db = connection) {
   return db('books').where('id', bookId).update('rating', rating)
 }
 
+function getAllCategoriesPerBookId(db = connection) {
+  return db('books_x_categories')
+    .join('categories', 'categories.id', 'books_x_categories.category_id')
+    .select('book_id', 'categories.name as category')
+    .then((result) => mapAllCategories(result))
+}
+
 module.exports = {
   getAllBooks,
   getOrAddAuthor,
@@ -93,4 +110,5 @@ module.exports = {
   setCover,
   updateBook,
   setRating,
+  getAllCategoriesPerBookId,
 }

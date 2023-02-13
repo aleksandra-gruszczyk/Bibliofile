@@ -4,23 +4,42 @@ const { uploadFileMiddleware } = require('./middleware/upload')
 
 const router = express.Router()
 
+function findCategories(categoryTable, book_id) {
+  let categories = []
+  let foundCategories = categoryTable.find(
+    (record) => record.book_id == book_id
+  )
+  if (typeof foundCategories !== 'undefined') {
+    categories = foundCategories.categories
+  }
+  return categories
+}
+
 router.get('/books', (req, res) => {
   db.getAllBooks()
-    .then((books) =>
-      res.json(
-        books.map((book) => ({
-          title: book.title,
-          authorDisplay: book.first_name + ' ' + book.last_name,
-          authorFirstName: book.first_name,
-          authorLastName: book.last_name,
-          year: book.year_pub,
-          status: book.status,
-          id: book.id,
-          cover: book.cover_img,
-          rating: book.rating,
-        }))
-      )
-    )
+    .then((books) => {
+      db.getAllCategoriesPerBookId()
+        .then((categoryTable) => {
+          return res.json(
+            books.map((book) => ({
+              title: book.title,
+              authorDisplay: book.first_name + ' ' + book.last_name,
+              authorFirstName: book.first_name,
+              authorLastName: book.last_name,
+              date: book.date_read,
+              status: book.status,
+              id: book.id,
+              cover: book.cover_img,
+              rating: book.rating,
+              categories: findCategories(categoryTable, book.id),
+            }))
+          )
+        })
+        .catch((error) => {
+          console.error(error)
+          res.sendStatus(500)
+        })
+    })
     .catch((error) => {
       console.error(error)
       res.sendStatus(500)

@@ -8,6 +8,7 @@ export function getBooksList() {
   return request
     .get(booksUrl)
     .then((res) => {
+      console.log('api' + res.body)
       return res.body
     })
     .catch((err) => console.log(err.message))
@@ -20,10 +21,10 @@ export function getBooksList() {
 //   id: book.id,
 // }))
 
-export function addBook(title, author, year, status, rating) {
+export function addBook(title, author, date, status, categories, rating) {
   return request
     .post(booksUrl)
-    .send({ title, author, year, status, rating })
+    .send({ title, author, date, status, categories, rating })
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))

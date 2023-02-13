@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.string('title')
     table.integer('author_id').references('authors.id')
     table.integer('status_id').references('status.id').defaultTo(1)
-    table.integer('year_pub')
+    table.date('date_read')
     table.datetime('date_added').defaultTo(knex.fn.now())
     table.unique(['title', 'author_id'])
     table.string('cover_img').defaultTo('default.png')
