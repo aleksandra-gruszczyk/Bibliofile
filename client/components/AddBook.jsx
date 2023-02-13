@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { addBook, addCover } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
@@ -16,7 +16,6 @@ import {
 import { showNotification } from '@mantine/notifications'
 
 function AddBook({ onSuccessfulAdd }) {
-  const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
   const [file, setFile] = useState(null)
   const [rating, setRating] = useState(null)
@@ -39,14 +38,6 @@ function AddBook({ onSuccessfulAdd }) {
     },
   })
 
-  function toggleFlag() {
-    setFlag(!flag)
-  }
-
-  useEffect(() => {
-    dispatch(fetchBooks())
-  }, [flag])
-
   function handleSubmit(values) {
     addBook(
       values.title,
@@ -62,7 +53,7 @@ function AddBook({ onSuccessfulAdd }) {
         if (file !== null) addCover(file, bookId)
       })
       .then(() => {
-        toggleFlag()
+        dispatch(fetchBooks())
         showNotification({
           message: `Book "${values.title}" has been added`,
           color: 'orange',

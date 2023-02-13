@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { fetchBooks } from '../actions/bookList'
 import { editBook, addCover } from '../apiClient'
 import { useDispatch } from 'react-redux'
@@ -15,7 +15,6 @@ import { showNotification } from '@mantine/notifications'
 import BookRating from './Rating'
 
 function EditBook({ book, onSuccessfulEdit }) {
-  const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
 
   const form = useForm({
@@ -27,14 +26,6 @@ function EditBook({ book, onSuccessfulEdit }) {
       status: book.status,
     },
   })
-
-  function toggleFlag() {
-    setFlag(!flag)
-  }
-
-  useEffect(() => {
-    dispatch(fetchBooks())
-  }, [flag])
 
   function handleSubmit(values) {
     editBook(
@@ -48,7 +39,7 @@ function EditBook({ book, onSuccessfulEdit }) {
       book.id
     )
       .then(() => {
-        toggleFlag()
+        dispatch(fetchBooks())
         showNotification({
           message: `Book record for "${values.title}" has been updated`,
           color: 'orange',
@@ -62,7 +53,7 @@ function EditBook({ book, onSuccessfulEdit }) {
   function handleChange(file) {
     addCover(file, book.id)
       .then(() => {
-        toggleFlag()
+        dispatch(fetchBooks())
       })
       .catch((error) => {
         console.error(error)

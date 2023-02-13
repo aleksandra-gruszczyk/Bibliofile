@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Button } from '@mantine/core'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
@@ -6,21 +6,12 @@ import { deleteBook } from '../apiClient'
 import { showNotification } from '@mantine/notifications'
 
 export default function RemoveBook({ book }) {
-  const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
-
-  function toggleFlag() {
-    setFlag(!flag)
-  }
-
-  useEffect(() => {
-    dispatch(fetchBooks())
-  }, [flag])
 
   function handleDelete() {
     deleteBook(book.id)
       .then(() => {
-        toggleFlag()
+        dispatch(fetchBooks())
         showNotification({
           message: `Book "${book.title}" has been removed`,
           color: 'orange',
