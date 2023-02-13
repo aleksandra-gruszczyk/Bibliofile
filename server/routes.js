@@ -69,8 +69,11 @@ router.get('/statuses', (req, res) => {
     })
 })
 
-router.post('/covers/:id', uploadFileMiddleware, (req, res) => {
-  db.setCover(req.params.id, req.params.id + '.png')
+router.post('/covers/:id/:timestamp', uploadFileMiddleware, (req, res) => {
+  db.setCover(
+    req.params.id,
+    req.params.id + '_' + req.params.timestamp + '.png'
+  )
     .then(() => {
       res.status(200).json({ filename: req.file })
     })

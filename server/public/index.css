@@ -69,3 +69,17 @@
   font-family: 'Yanone Kaffeesatz', 'sans-serif';
   font-size: 28px;
 }
+
+.container{
+  display: flex;
+  align-items: center;
+}
+.editForm{
+  width: 50%;
+  display: inline-flex;
+  padding: 1em;
+}
+.editForm .mantine-InputWrapper-root{
+  width: 320px;
+}
+

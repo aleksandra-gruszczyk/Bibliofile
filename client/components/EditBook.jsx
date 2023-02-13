@@ -6,8 +6,8 @@ import { useForm } from '@mantine/form'
 import {
   TextInput,
   Button,
+  Image,
   Select,
-  Text,
   Group,
   FileButton,
 } from '@mantine/core'
@@ -16,7 +16,6 @@ import { showNotification } from '@mantine/notifications'
 function EditBook({ book, onSuccessfulEdit }) {
   const [flag, setFlag] = useState(false)
   const dispatch = useDispatch()
-  const [file, setFile] = useState(null)
 
   const form = useForm({
     initialValues: {
@@ -60,87 +59,97 @@ function EditBook({ book, onSuccessfulEdit }) {
       })
   }
   function handleChange(file) {
-    setFile(file)
     addCover(file, book.id)
+      .then(() => {
+        toggleFlag()
+        console.log(book.cover)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
     <>
-      <form
-        encType="multipart/form-data"
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
-      >
-        <div style={{ maxWidth: 320, margin: 'auto' }}>
-          <TextInput
-            label="Title"
-            placeholder="Title"
-            {...form.getInputProps('title')}
-          />
-          <TextInput
-            mt="md"
-            label="First Name"
-            placeholder="First Name"
-            {...form.getInputProps('firstName')}
-          />
-          <TextInput
-            mt="md"
-            label="Last Name"
-            placeholder="Last Name"
-            {...form.getInputProps('lastName')}
-          />
-          <TextInput
-            mt="md"
-            label="Publication Year"
-            placeholder="Publication Year"
-            {...form.getInputProps('year')}
-          />
+      <div className="container">
+        <div className="editForm">
+          <Group position="center">
+            <Image
+              src={'bookCovers/' + book.cover}
+              alt="Cover image"
+              radius="sm"
+            />
 
-          <Select
-            mt="md"
-            label="Reading status"
-            placeholder="Reading status"
-            {...form.getInputProps('status')}
-            data={[
-              { value: `waiting`, label: 'To Be Read' },
-              { value: `reading`, label: 'Reading' },
-              { value: `finished`, label: 'Finished' },
-              { value: `DNF`, label: 'Did Not Finish' },
-            ]}
-          />
-
-          <Group position="center" mt="xl">
-            <Button
-              type="submit"
-              variant="gradient"
-              gradient={{ from: '#C70039', to: '#EFAE02' }}
-              compact="true"
-              mt="md"
-              radius="md"
-            >
-              Submit changes
-            </Button>
-          </Group>
-          <Group position="center" mt="xl">
             <FileButton
-              // type="submit" //??
               variant="subtle"
               color="orange"
               compact="true"
-              mt="md"
+              //mt="md"
               radius="md"
               onChange={handleChange}
               accept="image/png,image/jpeg, image/jpg"
             >
-              {(props) => <Button {...props}>Upload cover image</Button>}
+              {(props) => <Button {...props}>Change cover image</Button>}
             </FileButton>
-            {file && (
-              <Text size="sm" align="center" mt="sm">
-                Picked file: {file.name}
-              </Text>
-            )}
           </Group>
         </div>
-      </form>
+        <div className="editForm">
+          <form
+            encType="multipart/form-data"
+            onSubmit={form.onSubmit((values) => handleSubmit(values))}
+          >
+            <TextInput
+              label="Title"
+              placeholder="Title"
+              {...form.getInputProps('title')}
+            />
+            <TextInput
+              mt="md"
+              label="First Name"
+              placeholder="First Name"
+              {...form.getInputProps('firstName')}
+            />
+            <TextInput
+              mt="md"
+              label="Last Name"
+              placeholder="Last Name"
+              {...form.getInputProps('lastName')}
+            />
+            <TextInput
+              mt="md"
+              label="Publication Year"
+              placeholder="Publication Year"
+              {...form.getInputProps('year')}
+            />
+
+            <Select
+              mt="md"
+              label="Reading status"
+              placeholder="Reading status"
+              {...form.getInputProps('status')}
+              data={[
+                { value: `waiting`, label: 'To Be Read' },
+                { value: `reading`, label: 'Reading' },
+                { value: `finished`, label: 'Finished' },
+                { value: `DNF`, label: 'Did Not Finish' },
+              ]}
+            />
+
+            <Group position="center" mt="xl">
+              <Button
+                type="submit"
+                variant="gradient"
+                gradient={{ from: '#C70039', to: '#EFAE02' }}
+                compact="true"
+                mt="md"
+                radius="md"
+              >
+                Submit changes
+              </Button>
+            </Group>
+          </form>
+        </div>
+      </div>
     </>
   )
 }

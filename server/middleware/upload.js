@@ -7,7 +7,7 @@ let storage = multer.diskStorage({
     cb(null, __dirname + '/../public/bookCovers')
   },
   filename: (req, file, cb) => {
-    let imgName = req.params.id + '.png'
+    let imgName = req.params.id + '_' + req.params.timestamp + '.png'
     cb(null, imgName)
   },
 })

@@ -116,6 +116,7 @@ export function Back({ book, flipCard }) {
               opened={opened}
               onClose={() => setOpened(false)}
               title="Edit book"
+              size="80%"
             >
               <EditBook book={book} onSuccessfulEdit={close} />
             </Modal>
@@ -126,7 +127,6 @@ export function Back({ book, flipCard }) {
               mt="md"
               radius="md"
               onClick={() => setOpened(true)}
-              // name={book.id}
             >
               Edit
             </Button>

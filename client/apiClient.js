@@ -47,9 +47,10 @@ export function getStatusList() {
 export function addCover(file, bookId) {
   const data = new FormData()
   data.append('image', file)
+  let fileTimestamp = Date.now()
 
   return request
-    .post(coversUrl + '/' + bookId)
+    .post(coversUrl + '/' + bookId + '/' + fileTimestamp)
     .send(data)
     .then((res) => res.body)
 
