@@ -26,7 +26,7 @@ router.get('/books', (req, res) => {
               authorDisplay: book.first_name + ' ' + book.last_name,
               authorFirstName: book.first_name,
               authorLastName: book.last_name,
-              date: book.date_read,
+              dateRead: book.date_read,
               status: book.status,
               id: book.id,
               cover: book.cover_img,

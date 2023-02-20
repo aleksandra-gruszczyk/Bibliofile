@@ -8,18 +8,14 @@ export function getBooksList() {
   return request
     .get(booksUrl)
     .then((res) => {
-      console.log('api' + res.body)
-      return res.body
+      console.log('api ' + res.body[0].dateRead)
+      return res.body.map((book) => ({
+        ...book,
+        dateRead: new Date(book.dateRead),
+      }))
     })
     .catch((err) => console.log(err.message))
 }
-//.map((book) => ({
-//   title: book.title,
-//   author: book.author,
-//   year: book.year,
-//   status: book.status,
-//   id: book.id,
-// }))
 
 export function addBook(title, author, date, status, categories, rating) {
   return request

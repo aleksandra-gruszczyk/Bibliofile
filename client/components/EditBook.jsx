@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { fetchBooks } from '../actions/bookList'
 import { editBook, addCover } from '../apiClient'
 import { useDispatch } from 'react-redux'
@@ -13,16 +13,18 @@ import {
 } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import BookRating from './Rating'
+import { DatePicker } from '@mantine/dates'
 
 function EditBook({ book, onSuccessfulEdit }) {
   const dispatch = useDispatch()
+  // const [dateRead, setDateRead] = useState(new Date(book.dateRead))
 
   const form = useForm({
     initialValues: {
       title: book.title,
       firstName: book.authorFirstName,
       lastName: book.authorLastName,
-      year: book.year,
+      dateRead: book.dateRead,
       status: book.status,
     },
   })
@@ -34,7 +36,7 @@ function EditBook({ book, onSuccessfulEdit }) {
         firstName: values.firstName.trim(),
         lastName: values.lastName.trim(),
       },
-      values.year,
+      values.dateRead,
       values.status,
       book.id
     )
@@ -105,11 +107,13 @@ function EditBook({ book, onSuccessfulEdit }) {
               placeholder="Last Name"
               {...form.getInputProps('lastName')}
             />
-            <TextInput
+            <DatePicker
+              // value={dateRead}
+              // onChange={setDateRead}
               mt="md"
-              label="Publication Year"
-              placeholder="Publication Year"
-              {...form.getInputProps('year')}
+              label="Date Read"
+              placeholder="Date Read"
+              {...form.getInputProps('dateRead')}
             />
 
             <Select

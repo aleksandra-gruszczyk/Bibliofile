@@ -1,6 +1,5 @@
 import {
   BackgroundImage,
-  Badge,
   Button,
   Card,
   Center,
@@ -14,6 +13,7 @@ import RemoveBook from './RemoveBook'
 import EditBook from './EditBook'
 import BookRating from './Rating'
 import FlipButton from './FlipButton'
+import Tag from './Badge'
 
 export function DefaultCover({ book }) {
   if (book.cover == 'default.png') {
@@ -66,16 +66,14 @@ export function Back({ book, flipCard }) {
             &quot;{book.title}&quot;
           </Text>
           <Text weight={350} ta="center">
-            by {book.authorDisplay} ({book.year})
+            by {book.authorDisplay}
           </Text>
         </Card.Section>
         <Card.Section className="cardSectionBack" py="lg" mt="lg" mb="lg">
-          <Badge
-            variant="gradient"
-            gradient={{ from: '#C70039', to: '#EFAE02' }}
-          >
-            {book.status}
-          </Badge>
+          <Center>
+            <Tag text={book.status} />
+            <Tag text={book.dateRead.getFullYear()} />
+          </Center>
         </Card.Section>
         <Card.Section
           className="cardSectionBack"
