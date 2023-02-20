@@ -51,7 +51,6 @@ function AddBook({ onSuccessfulAdd }) {
       },
       values.date,
       values.status,
-      values.categories,
       rating
     )
       .then((bookId) => {

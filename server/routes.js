@@ -54,7 +54,7 @@ router.post('/books', (req, res) => {
         .addBook(
           req.body.title,
           authorId,
-          req.body.year,
+          req.body.date,
           req.body.status,
           req.body.rating
         )
@@ -124,6 +124,17 @@ router.post('/books/:id', (req, res) => {
 
 router.post('/ratings/:id', (req, res) => {
   db.setRating(req.params.id, req.body.rating)
+    .then((bookId) => {
+      res.status(200).json(bookId)
+    })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(500)
+    })
+})
+
+router.post('/categories/:id', (req, res) => {
+  db.setCategories(req.params.id, req.body.categoryId)
     .then((bookId) => {
       res.status(200).json(bookId)
     })

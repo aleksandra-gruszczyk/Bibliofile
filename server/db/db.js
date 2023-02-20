@@ -76,7 +76,7 @@ function setCover(bookId, cover, db = connection) {
   return db('books').where('id', bookId).update('cover_img', cover)
 }
 
-function updateBook(bookId, title, authorId, year, status, db = connection) {
+function updateBook(bookId, title, authorId, date, status, db = connection) {
   return db('status')
     .select('id')
     .where('name', status)
@@ -84,7 +84,7 @@ function updateBook(bookId, title, authorId, year, status, db = connection) {
       return db('books').where('id', bookId).update({
         title: title,
         author_id: authorId,
-        year_pub: year,
+        date_read: date,
         status_id: result[0].id,
       })
     })
@@ -101,6 +101,13 @@ function getAllCategoriesPerBookId(db = connection) {
     .then((result) => mapAllCategories(result))
 }
 
+function setCategories(bookId, categoryId, db = connection) {
+  return db('books_x_categories').insert({
+    book_id: bookId,
+    category_id: categoryId,
+  })
+}
+
 module.exports = {
   getAllBooks,
   getOrAddAuthor,
@@ -111,4 +118,5 @@ module.exports = {
   updateBook,
   setRating,
   getAllCategoriesPerBookId,
+  setCategories,
 }
