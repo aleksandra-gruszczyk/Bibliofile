@@ -134,14 +134,18 @@ router.post('/ratings/:id', (req, res) => {
 })
 
 router.post('/categories/:id', (req, res) => {
-  db.setCategories(req.params.id, req.body.categoryId)
-    .then((bookId) => {
-      res.status(200).json(bookId)
-    })
-    .catch((error) => {
-      console.error(error)
-      res.sendStatus(500)
-    })
+  for (let i = 0; i < req.body.categories.length; i++) {
+    const category = req.body.categories[i]
+    db.setCategory(req.params.id, category)
+      .then((x) => {
+        console.log(x)
+      })
+      .catch((error) => {
+        console.error(error)
+        res.sendStatus(500)
+      })
+  }
+  res.sendStatus(200)
 })
 
 module.exports = router

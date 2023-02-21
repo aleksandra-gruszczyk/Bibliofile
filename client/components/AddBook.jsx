@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addBook, addCover } from '../apiClient'
+import { addBook, addCover, addCategories } from '../apiClient'
 import { fetchBooks } from '../actions/bookList'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
@@ -54,7 +54,9 @@ function AddBook({ onSuccessfulAdd }) {
       rating
     )
       .then((bookId) => {
+        console.log(values.categories)
         if (file !== null) addCover(file, bookId)
+        addCategories(bookId, values.categories)
       })
       .then(() => {
         dispatch(fetchBooks())
@@ -122,7 +124,7 @@ function AddBook({ onSuccessfulAdd }) {
             data={[
               { value: `fiction`, label: 'fiction' },
               { value: `non-fiction`, label: 'non-fiction' },
-              { value: `graphic novel`, label: 'graphic novel' },
+              { value: `graphic novels`, label: 'graphic novels' },
               { value: `manga`, label: 'manga' },
               { value: `mythology`, label: 'mythology' },
               { value: `fantasy`, label: 'fantasy' },

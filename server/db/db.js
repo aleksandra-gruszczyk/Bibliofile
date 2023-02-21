@@ -19,15 +19,7 @@ function getAllBooks(db = connection) {
     )
 }
 
-function addBook(
-  title,
-  authorId,
-  date,
-  status,
-  categories,
-  rating,
-  db = connection
-) {
+function addBook(title, authorId, date, status, rating, db = connection) {
   return db('status')
     .select('id')
     .where('name', status)
@@ -37,7 +29,6 @@ function addBook(
         author_id: authorId,
         date_read: date,
         status_id: result[0].id,
-        categories: categories,
         rating: rating,
       })
     })
@@ -101,14 +92,32 @@ function getAllCategoriesPerBookId(db = connection) {
     .then((result) => mapAllCategories(result))
 }
 
-function setCategories(bookId, categoryId, db = connection) {
-  return db('books_x_categories').insert({
-    book_id: bookId,
-    category_id: categoryId,
-  })
+function getCategoryId(category, db = connection) {
+  return db('categories').select('id').where('name', category)
 }
-
+function clearCategories(bookId, db = connection) {
+  return db('books_x_categories').where('book_id', bookId).delete()
+}
+function setCategory(bookId, category, db = connection) {
+  return clearCategories(bookId)
+    .then(() => {
+      return getCategoryId(category)
+        .then((cat) => {
+          return db('books_x_categories').insert({
+            book_id: bookId,
+            category_id: cat[0].id,
+          })
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
 module.exports = {
+  getCategoryId,
   getAllBooks,
   getOrAddAuthor,
   addBook,
@@ -118,5 +127,5 @@ module.exports = {
   updateBook,
   setRating,
   getAllCategoriesPerBookId,
-  setCategories,
+  setCategory,
 }
