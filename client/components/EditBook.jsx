@@ -3,17 +3,11 @@ import { fetchBooks } from '../actions/bookList'
 import { editBook, addCover } from '../apiClient'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
-import {
-  TextInput,
-  Button,
-  Image,
-  Select,
-  Group,
-  FileButton,
-} from '@mantine/core'
+import { TextInput, Button, Image, Select, Group } from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import BookRating from './Rating'
 import { DatePicker } from '@mantine/dates'
+import EditImage from './EditImage'
 
 function EditBook({ book, onSuccessfulEdit }) {
   const dispatch = useDispatch()
@@ -44,7 +38,7 @@ function EditBook({ book, onSuccessfulEdit }) {
         dispatch(fetchBooks())
         showNotification({
           message: `Book record for "${values.title}" has been updated`,
-          color: 'orange',
+          color: '#111F49',
         })
         onSuccessfulEdit()
       })
@@ -73,16 +67,10 @@ function EditBook({ book, onSuccessfulEdit }) {
               radius="sm"
             />
 
-            <FileButton
-              variant="subtle"
-              color="orange"
-              compact="true"
-              radius="md"
-              onChange={handleChange}
-              accept="image/png,image/jpeg, image/jpg"
-            >
-              {(props) => <Button {...props}>Change cover image</Button>}
-            </FileButton>
+            <EditImage change={handleChange}>
+              {(props) => <Button {...props}></Button>}
+            </EditImage>
+            <BookRating book={book} />
           </Group>
         </div>
         <div className="editForm">
@@ -128,12 +116,12 @@ function EditBook({ book, onSuccessfulEdit }) {
                 { value: `DNF`, label: 'Did Not Finish' },
               ]}
             />
-            <BookRating book={book} />
+
             <Group position="center" mt="xl">
               <Button
                 type="submit"
                 variant="gradient"
-                gradient={{ from: '#C70039', to: '#EFAE02' }}
+                gradient={{ from: '#111F49', to: '#5D90FF' }}
                 compact="true"
                 mt="md"
                 radius="md"

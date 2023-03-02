@@ -25,7 +25,7 @@ export default function RemoveBook({ book }) {
   return (
     <Button
       variant="gradient"
-      gradient={{ from: '#C70039', to: '#EFAE02' }}
+      gradient={{ from: '#111F49', to: '#5D90FF' }}
       compact="true"
       mt="md"
       radius="md"

@@ -64,10 +64,10 @@ export function Back({ book, flipCard }) {
           mb="lg"
           position="apart"
         >
-          <Text weight={500} ta="center">
+          <Text className="textCardBold" ta="center">
             &quot;{book.title}&quot;
           </Text>
-          <Text weight={350} ta="center">
+          <Text className="textCard" ta="center">
             by {book.authorDisplay}
           </Text>
         </Card.Section>
@@ -94,7 +94,7 @@ export function Back({ book, flipCard }) {
             </Modal>
             <Button
               variant="gradient"
-              gradient={{ from: '#C70039', to: '#EFAE02' }}
+              gradient={{ from: '#111F49', to: '#5D90FF' }}
               compact="true"
               mt="md"
               radius="md"

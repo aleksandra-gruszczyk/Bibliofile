@@ -7,7 +7,7 @@ export default function Tag({ text }) {
       mx="sm"
       px="md"
       variant="gradient"
-      gradient={{ from: '#C70039', to: '#EFAE02' }}
+      gradient={{ from: '#111F49', to: '#74A0FF' }}
     >
       {text}
     </Badge>

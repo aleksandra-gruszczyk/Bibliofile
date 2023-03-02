@@ -30,7 +30,7 @@ const App = () => {
         <Affix position={{ bottom: 20, right: 20 }}>
           <Button
             variant="gradient"
-            gradient={{ from: '#C70039', to: '#EFAE02' }}
+            gradient={{ from: '#111F49', to: '#5D90FF' }}
             mt="md"
             radius="md"
             onClick={() => setOpened(true)}

@@ -1,3 +1,7 @@
+body{
+  background-color: #FFF7E0;
+}
+
 .card {
   width: 240px;
   height: 350px;
@@ -39,7 +43,6 @@
   bottom: 15px;
   right: 8px;
   margin: 8px;
-  opacity: 75%;
   }
 
 .header {
@@ -86,6 +89,7 @@
   display: inline-flex;
   padding: 0.25em;
   list-style-type: none;
+  font-family: 'Yanone Kaffeesatz', 'sans-serif';
 }
 
 .categoryList{
@@ -93,4 +97,27 @@
   margin: 8px;
   padding-inline-start: 0px;
   align-items:center;
+}
+
+.mantine-g8i2rh {
+  color: #111F49;
+}
+
+.textCard{
+  font-family: 'Yanone Kaffeesatz', 'sans-serif';
+  font-size: large;
+}
+
+.textCardBold{
+  font-family: 'Yanone Kaffeesatz', 'sans-serif';
+  font-weight: bold;
+  font-size: larger;
+}
+
+.editImage{
+  position: absolute;
+  bottom: 94px;
+  left: 228px;
+  margin: 8px;
+  
 }
