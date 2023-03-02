@@ -27,6 +27,11 @@
 
   .cardSectionBack {
     position: relative;
+    display: flex;
+    flex-flow: column;
+  }
+  .cardSectionBack>div{
+    flex-direction: column;
   }
 
 .flip {
@@ -77,3 +82,15 @@
   width: 320px;
 }
 
+.categoryList li{
+  display: inline-flex;
+  padding: 0.25em;
+  list-style-type: none;
+}
+
+.categoryList{
+
+  margin: 8px;
+  padding-inline-start: 0px;
+  align-items:center;
+}

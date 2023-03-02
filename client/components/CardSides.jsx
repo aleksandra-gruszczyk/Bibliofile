@@ -1,5 +1,6 @@
 import {
   BackgroundImage,
+  Box,
   Button,
   Card,
   Center,
@@ -14,6 +15,7 @@ import EditBook from './EditBook'
 import BookRating from './Rating'
 import FlipButton from './FlipButton'
 import Tag from './Badge'
+import DisplayCategories from './DisplayCategories'
 
 export function DefaultCover({ book }) {
   if (book.cover == 'default.png') {
@@ -69,22 +71,18 @@ export function Back({ book, flipCard }) {
             by {book.authorDisplay}
           </Text>
         </Card.Section>
-        <Card.Section className="cardSectionBack" py="lg" mt="lg" mb="lg">
+        <Card.Section className="cardSectionBack" py="lg" mt="lg">
           <Center>
-            <Tag text={book.status} />
-            <Tag text={book.dateRead.getFullYear()} />
+            <Box>
+              <Tag text={book.status} />
+              <Tag text={book.dateRead.getFullYear()} />
+            </Box>
+            <DisplayCategories categoryList={book.categories} />
+            <BookRating book={book} />
           </Center>
         </Card.Section>
-        <Card.Section
-          className="cardSectionBack"
-          inheritPadding
-          mt="sm"
-          pb="md"
-        >
-          <BookRating book={book} />
-        </Card.Section>
 
-        <Card.Section className="cardSectionBack" inheritPadding mt="sm">
+        <Card.Section className="cardSectionBack" inheritPadding>
           <SimpleGrid cols={2}>
             <Modal
               opened={opened}

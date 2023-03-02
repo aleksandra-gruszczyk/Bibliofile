@@ -74,7 +74,6 @@ export function editRating(bookId, rating) {
 }
 
 export function addCategories(bookId, categories) {
-  console.log('api ' + categories)
   return request
     .post(categoriesUrl + '/' + bookId)
     .send({ categories })
