@@ -3,7 +3,14 @@ import { fetchBooks } from '../actions/bookList'
 import { editBook, addCover } from '../apiClient'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
-import { TextInput, Button, Image, Select, Group } from '@mantine/core'
+import {
+  TextInput,
+  Button,
+  Image,
+  Select,
+  Group,
+  MultiSelect,
+} from '@mantine/core'
 import { showNotification } from '@mantine/notifications'
 import BookRating from './Rating'
 import { DatePicker } from '@mantine/dates'
@@ -32,6 +39,7 @@ function EditBook({ book, onSuccessfulEdit }) {
       },
       values.dateRead,
       values.status,
+      values.categories,
       book.id
     )
       .then(() => {
@@ -114,6 +122,33 @@ function EditBook({ book, onSuccessfulEdit }) {
                 { value: `reading`, label: 'Reading' },
                 { value: `finished`, label: 'Finished' },
                 { value: `DNF`, label: 'Did Not Finish' },
+              ]}
+            />
+
+            <MultiSelect
+              mt="md"
+              label="Categories"
+              placeholder="Categories"
+              {...form.getInputProps('categories')}
+              data={[
+                { value: `fiction`, label: 'fiction' },
+                { value: `non-fiction`, label: 'non-fiction' },
+                { value: `graphic novels`, label: 'graphic novels' },
+                { value: `manga`, label: 'manga' },
+                { value: `mythology`, label: 'mythology' },
+                { value: `fantasy`, label: 'fantasy' },
+                { value: `science fiction`, label: 'science fiction' },
+                { value: `horror`, label: 'horror' },
+                { value: `mystery`, label: 'mystery' },
+                { value: `thriller`, label: 'thriller' },
+                { value: `romance`, label: 'romance' },
+                { value: `comedy`, label: 'comedy' },
+                { value: `drama`, label: 'drama' },
+                { value: `children's fiction`, label: `children's fiction` },
+                { value: `classic`, label: 'classic' },
+                { value: `poetry`, label: 'poetry' },
+                { value: `action/adventure`, label: 'action/adventure' },
+                { value: `science`, label: 'science' },
               ]}
             />
 

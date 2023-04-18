@@ -13,7 +13,7 @@ import React, { useState } from 'react'
 import RemoveBook from './RemoveBook'
 import EditBook from './EditBook'
 import BookRating from './Rating'
-import FlipButton from './FlipButton'
+// import FlipButton from './FlipButton'
 import Tag from './Badge'
 import DisplayCategories from './DisplayCategories'
 
@@ -31,7 +31,14 @@ export function DefaultCover({ book }) {
 export function Front({ book, flipCard }) {
   return (
     <>
-      <Card shadow="sm" p="lg" radius="md" withBorder className="card">
+      <Card
+        shadow="sm"
+        p="lg"
+        radius="md"
+        withBorder
+        className="card"
+        onClick={flipCard}
+      >
         <Card.Section className="cardSectionFront">
           <BackgroundImage
             className="cover"
@@ -41,7 +48,7 @@ export function Front({ book, flipCard }) {
             <DefaultCover book={book} />
           </BackgroundImage>
         </Card.Section>
-        <FlipButton onFlip={flipCard} />
+        {/* <FlipButton onFlip={flipCard} /> */}
       </Card>
     </>
   )
@@ -63,6 +70,7 @@ export function Back({ book, flipCard }) {
           mt="lg"
           mb="lg"
           position="apart"
+          onClick={flipCard}
         >
           <Text className="textCardBold" ta="center">
             &quot;{book.title}&quot;
@@ -71,7 +79,12 @@ export function Back({ book, flipCard }) {
             by {book.authorDisplay}
           </Text>
         </Card.Section>
-        <Card.Section className="cardSectionBack" py="lg" mt="lg">
+        <Card.Section
+          className="cardSectionBack"
+          py="lg"
+          mt="lg"
+          onClick={flipCard}
+        >
           <Center>
             <Box>
               <Tag text={book.status} />
@@ -105,8 +118,13 @@ export function Back({ book, flipCard }) {
             <RemoveBook book={book} />
           </SimpleGrid>
         </Card.Section>
-
-        <FlipButton onFlip={flipCard} />
+        <Card.Section
+          className="cardSectionBack"
+          py="lg"
+          mt="lg"
+          onClick={flipCard}
+        ></Card.Section>
+        {/* <FlipButton onFlip={flipCard} /> */}
       </Card>
     </>
   )
