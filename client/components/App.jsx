@@ -15,7 +15,8 @@ const App = () => {
   return (
     <main>
       <MainHeader />
-      <h1 className="h1">{'My books'}</h1>
+      <section></section>
+      {/* <h1 className="h1">{'My books'}</h1> */}
       <section>
         <Books />
       </section>

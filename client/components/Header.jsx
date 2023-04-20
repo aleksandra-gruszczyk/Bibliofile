@@ -6,9 +6,14 @@ export default function MainHeader() {
     <Header
       className="header"
       height="auto"
-      style={{ backgroundColor: '#FDBA00', color: '#000', opacity: '100%' }}
+      style={{
+        backgroundColor: '#FFC830',
+        color: '#000',
+        opacity: '100%',
+        marginBottom: '1rem',
+      }}
     >
-      <Text className="header">Bibliofile</Text>
+      <Text className="headerText">Bibliofile</Text>
     </Header>
   )
 }

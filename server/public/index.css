@@ -1,5 +1,5 @@
 body{
-  background-color: #FFF7E0;
+  background-color: #FFFCF0;
 }
 
 .card {
@@ -45,14 +45,13 @@ body{
   margin: 8px;
   }
 
-.header {
+.headerText {
   font-family: 'Homemade Apple'; 
   font-style: 'cursive';
   font-size: xx-large;
   text-align: center;
-  font-weight: 600;
+  font-weight: 800;
   padding-top: 0.3em;
-  
 }
 
 .h1 {
