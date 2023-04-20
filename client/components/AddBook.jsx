@@ -54,7 +54,6 @@ function AddBook({ onSuccessfulAdd }) {
       rating
     )
       .then((bookId) => {
-        console.log(values.categories)
         if (file !== null) addCover(file, bookId)
         addCategories(bookId, values.categories)
       })

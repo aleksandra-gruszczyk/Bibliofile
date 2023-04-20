@@ -80,3 +80,12 @@ export function addCategories(bookId, categories) {
     .then((res) => res.body)
     .catch((err) => console.log('ERROR: ' + err.message))
 }
+
+// export function editCategories(bookId, categories){
+//   return request
+//   .post(categoriesUrl + '/' + bookId)
+//   .send({ categories })
+//   .then((res) => res.body)
+
+//     .catch((err) => console.log('ERROR: ' + err.message))
+// }

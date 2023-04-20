@@ -1,6 +1,6 @@
 import React from 'react'
 import { fetchBooks } from '../actions/bookList'
-import { editBook, addCover } from '../apiClient'
+import { editBook, addCover, addCategories } from '../apiClient'
 import { useDispatch } from 'react-redux'
 import { useForm } from '@mantine/form'
 import {
@@ -27,6 +27,7 @@ function EditBook({ book, onSuccessfulEdit }) {
       lastName: book.authorLastName,
       dateRead: book.dateRead,
       status: book.status,
+      categories: book.categories,
     },
   })
 
@@ -39,9 +40,11 @@ function EditBook({ book, onSuccessfulEdit }) {
       },
       values.dateRead,
       values.status,
-      values.categories,
       book.id
     )
+      .then(() => {
+        addCategories(book.id, values.categories)
+      })
       .then(() => {
         dispatch(fetchBooks())
         showNotification({
@@ -54,6 +57,7 @@ function EditBook({ book, onSuccessfulEdit }) {
         console.error(error)
       })
   }
+
   function handleChange(file) {
     addCover(file, book.id)
       .then(() => {

@@ -33,9 +33,3 @@ function Flipped({ front: Front, back: Back }, ref) {
     </>
   )
 }
-
-// function flipConfig(flipped) {
-//   return {
-
-//   }
-// }

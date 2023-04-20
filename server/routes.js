@@ -137,8 +137,8 @@ router.post('/categories/:id', (req, res) => {
   for (let i = 0; i < req.body.categories.length; i++) {
     const category = req.body.categories[i]
     db.setCategory(req.params.id, category)
-      .then((x) => {
-        console.log(x)
+      .then(() => {
+        res.status(200)
       })
       .catch((error) => {
         console.error(error)
