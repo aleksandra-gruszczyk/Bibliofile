@@ -15,11 +15,10 @@ const App = () => {
   return (
     <main>
       <MainHeader />
-      <section></section>
-      {/* <h1 className="h1">{'My books'}</h1> */}
-      <section>
+      <div className="books">
         <Books />
-      </section>
+      </div>
+
       <section>
         <Modal
           opened={opened}

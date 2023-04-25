@@ -9,6 +9,11 @@ body{
   
 }
 
+.books {
+  margin: auto;
+  width: 90%;
+}
+
 .cardStyles {
   display: flex;
   position: absolute;
