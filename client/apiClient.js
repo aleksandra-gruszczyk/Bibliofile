@@ -55,10 +55,10 @@ export function addCover(file, bookId) {
     .catch((err) => console.log('ERROR: ' + err.message))
 }
 
-export function editBook(title, author, year, status, bookId) {
+export function editBook(title, author, year, status, categories, bookId) {
   return request
     .post(booksUrl + '/' + bookId)
-    .send({ title, author, year, status })
+    .send({ title, author, year, status, categories })
     .then((res) => res.body)
 
     .catch((err) => console.log('ERROR: ' + err.message))
@@ -81,10 +81,10 @@ export function addCategories(bookId, categories) {
     .catch((err) => console.log('ERROR: ' + err.message))
 }
 
-// export function editCategories(bookId, categories){
+// export function editCategories(category){
 //   return request
-//   .post(categoriesUrl + '/' + bookId)
-//   .send({ categories })
+//   .post(categoriesUrl + '/' + categoryId)
+//   .send({ category })
 //   .then((res) => res.body)
 
 //     .catch((err) => console.log('ERROR: ' + err.message))

@@ -112,7 +112,8 @@ router.post('/books/:id', (req, res) => {
           req.body.title,
           authorId,
           req.body.year,
-          req.body.status
+          req.body.status,
+          req.body.categories
         )
         .then((bookId) => res.json(bookId))
     })
@@ -133,19 +134,7 @@ router.post('/ratings/:id', (req, res) => {
     })
 })
 
-router.post('/categories/:id', (req, res) => {
-  for (let i = 0; i < req.body.categories.length; i++) {
-    const category = req.body.categories[i]
-    db.setCategory(req.params.id, category)
-      .then(() => {
-        res.status(200)
-      })
-      .catch((error) => {
-        console.error(error)
-        res.sendStatus(500)
-      })
-  }
-  res.sendStatus(200)
-})
+// router.post('/categories/:id', (req, res) => {
+// })
 
 module.exports = router

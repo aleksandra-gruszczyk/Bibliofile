@@ -67,11 +67,20 @@ function setCover(bookId, cover, db = connection) {
   return db('books').where('id', bookId).update('cover_img', cover)
 }
 
-function updateBook(bookId, title, authorId, date, status, db = connection) {
+function updateBook(
+  bookId,
+  title,
+  authorId,
+  date,
+  status,
+  categories,
+  db = connection
+) {
   return db('status')
     .select('id')
     .where('name', status)
     .then((result) => {
+      setCategory(bookId, categories, db)
       return db('books').where('id', bookId).update({
         title: title,
         author_id: authorId,
@@ -98,24 +107,27 @@ function getCategoryId(category, db = connection) {
 function clearCategories(bookId, db = connection) {
   return db('books_x_categories').where('book_id', bookId).delete()
 }
-function setCategory(bookId, category, db = connection) {
-  return clearCategories(bookId)
+function setCategory(bookId, categories, db = connection) {
+  clearCategories(bookId)
     .then(() => {
-      return getCategoryId(category)
-        .then((cat) => {
-          return db('books_x_categories').insert({
-            book_id: bookId,
-            category_id: cat[0].id,
+      categories.forEach((category) =>
+        getCategoryId(category)
+          .then((cat) => {
+            return db('books_x_categories').insert({
+              book_id: bookId,
+              category_id: cat[0].id,
+            })
           })
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+          .catch((error) => {
+            console.error(error)
+          })
+      )
     })
     .catch((error) => {
       console.error(error)
     })
 }
+
 module.exports = {
   getCategoryId,
   getAllBooks,
