@@ -34,6 +34,7 @@ const App = () => {
             mt="md"
             radius="md"
             onClick={() => setOpened(true)}
+            id="addButton"
           >
             <TfiPlus />
           </Button>
