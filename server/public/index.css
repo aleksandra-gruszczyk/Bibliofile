@@ -12,7 +12,7 @@ body{
 .books {
   margin: auto;
   width: 90%;
-}
+  }
 
 .cardStyles {
   display: flex;
@@ -54,6 +54,15 @@ body{
   font-family: 'Homemade Apple'; 
   font-style: 'cursive';
   font-size: xx-large;
+  text-align: center;
+  font-weight: 800;
+  padding-top: 0.3em;
+}
+
+.bodyText {
+  font-family: 'Homemade Apple'; 
+  font-style: 'cursive';
+  font-size: x-large;
   text-align: center;
   font-weight: 800;
   padding-top: 0.3em;
@@ -123,5 +132,4 @@ body{
   bottom: 94px;
   left: 228px;
   margin: 8px;
-  
-}
+  }

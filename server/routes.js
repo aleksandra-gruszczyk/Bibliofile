@@ -16,6 +16,7 @@ function findCategories(categoryTable, book_id) {
 }
 
 router.get('/books', (req, res) => {
+  // return res.json([])
   db.getAllBooks()
     .then((books) => {
       db.getAllCategoriesPerBookId()
