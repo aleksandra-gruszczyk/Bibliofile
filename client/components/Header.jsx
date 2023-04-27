@@ -10,7 +10,7 @@ export default function MainHeader() {
         backgroundColor: '#FFC830',
         color: '#000',
         opacity: '100%',
-        marginBottom: '1rem',
+        marginBottom: '2rem',
       }}
     >
       <Text className="headerText">Bibliofile</Text>
